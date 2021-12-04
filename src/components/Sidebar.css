@@ -1,0 +1,43 @@
+.sidebar {
+  padding: 0 10px;
+  height: 100vh;
+  flex: 0.2;
+  min-width: 230px;
+  background-color: white;
+}
+
+.sidebar__logo {
+  margin-right: auto;
+  height: 70px;
+  padding: 10px;
+  font-size: 48px;
+}
+
+.sidebar__options {
+  padding-left: 30px;
+  height: 15vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.sidebar__option {
+  display: flex;
+  cursor: pointer;
+}
+
+.sidebar__optionLogo {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar__optionTitle {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  color: #266679;
+}
