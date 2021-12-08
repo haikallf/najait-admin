@@ -1,0 +1,44 @@
+/* style={{ fontSize: "24px", marginBottom: "30px", marginTop: "30px" }} */
+
+.tambahPenjahit__top {
+  width: 100%;
+  font-size: 24px;
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tambahPenjahit__form {
+  background-color: white;
+  border-radius: 10px;
+  height: 80vh;
+  width: 50vw;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.tambahPenjahit__userInfo {
+  margin-bottom: 20px;
+}
+
+.tambahPenjahit__userInfo > p,
+.tambahPenjahit__contactInfoTop > p {
+  color: #266679;
+  margin-bottom: 15px;
+}
+
+.tambahPenjahit__userInfoNama {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.tambahPenjahit__contactInfoTop {
+}
+
+.tambahPenjahit__contactInfoBottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
