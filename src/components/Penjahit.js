@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Button } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 const rows = [
   {
@@ -50,6 +51,16 @@ const rows = [
 ];
 
 export default function Penjahit() {
+  const history = useHistory();
+
+  const goToTambahPenjahit = () => {
+    history.push("/tambahpenjahit");
+  };
+
+  const goToEditPenjahit = () => {
+    history.push("/editpenjahit");
+  };
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -73,9 +84,10 @@ export default function Penjahit() {
           variant="contained"
           style={{
             borderColor: "#4abdac",
-            color: "#4abdac",
+            color: "#266679",
             backgroundColor: "white",
           }}
+          onClick={goToTambahPenjahit}
         >
           Tambah Penjahit
         </Button>
@@ -106,6 +118,7 @@ export default function Penjahit() {
                           borderColor: "#4abdac",
                           color: "#4abdac",
                         }}
+                        onClick={goToEditPenjahit}
                       >
                         Edit
                       </Button>

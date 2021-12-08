@@ -1,10 +1,10 @@
 import * as React from "react";
-import "./TambahPenjahit.css";
+import "./EditPenjahit.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/system";
 
-export default function TambahPenjahit() {
+export default function EditPenjahit() {
   const TealTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "#266679",
@@ -26,15 +26,15 @@ export default function TambahPenjahit() {
   });
 
   return (
-    <div className="tambahPenjahit">
-      <div className="tambahPenjahit__top">
-        <div className="tambahPenjahit__title">TAMBAH PENJAHIT</div>
+    <div className="editPenjahit">
+      <div className="editPenjahit__top">
+        <div className="editPenjahit__title">EDIT PENJAHIT</div>
       </div>
 
-      <div className="tambahPenjahit__form">
-        <div className="tambahPenjahit__userInfo">
+      <div className="editPenjahit__form">
+        <div className="editPenjahit__userInfo">
           <p>Informasi Penjahit</p>
-          <div className="tambahPenjahit__userInfoNama">
+          <div className="editPenjahit__userInfoNama">
             <TealTextField
               sx={{ flex: "0.49" }}
               id="outlined-basic"
@@ -55,7 +55,7 @@ export default function TambahPenjahit() {
             variant="outlined"
           />
         </div>
-        <div className="tambahPenjahit__contactInfoTop">
+        <div className="editPenjahit__contactInfoTop">
           <p>Informasi Kontak</p>
           <TealTextField
             sx={{ width: "100%" }}
@@ -64,7 +64,7 @@ export default function TambahPenjahit() {
             variant="outlined"
           />
         </div>
-        <div className="tambahPenjahit__contactInfoBottom">
+        <div className="editPenjahit__contactInfoBottom">
           <TealTextField
             sx={{ flex: "0.32" }}
             id="outlined-basic"

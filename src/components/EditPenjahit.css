@@ -1,6 +1,6 @@
 /* style={{ fontSize: "24px", marginBottom: "30px", marginTop: "30px" }} */
 
-.tambahPenjahit__top {
+.editPenjahit__top {
   width: 100%;
   font-size: 24px;
   margin: 30px 0;
@@ -9,7 +9,7 @@
   justify-content: space-between;
 }
 
-.tambahPenjahit__form {
+.editPenjahit__form {
   background-color: white;
   border-radius: 10px;
   height: 80vh;
@@ -18,26 +18,26 @@
   padding: 30px;
 }
 
-.tambahPenjahit__userInfo {
+.editPenjahit__userInfo {
   margin-bottom: 20px;
 }
 
-.tambahPenjahit__userInfo > p,
-.tambahPenjahit__contactInfoTop > p {
+.editPenjahit__userInfo > p,
+.editPenjahit__contactInfoTop > p {
   color: #266679;
   margin-bottom: 15px;
 }
 
-.tambahPenjahit__userInfoNama {
+.editPenjahit__userInfoNama {
   display: flex;
   margin-bottom: 20px;
   justify-content: space-between;
 }
 
-.tambahPenjahit__contactInfoTop {
+.editPenjahit__contactInfoTop {
 }
 
-.tambahPenjahit__contactInfoBottom {
+.editPenjahit__contactInfoBottom {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
