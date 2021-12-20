@@ -87,15 +87,15 @@ export default function Pesanan() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="center">Nama Penjahit</TableCell>
-                <TableCell align="center">Pendapatan</TableCell>
-                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">ID Pesanan</TableCell>
+                <TableCell align="center">Nama Pemesan</TableCell>
+                <TableCell align="center">Harga</TableCell>
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={row.name}>
                     <TableCell align="center">{row.idBahan}</TableCell>
