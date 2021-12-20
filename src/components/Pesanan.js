@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import "./Penjahit.css";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -9,8 +9,10 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Button } from "@mui/material";
+import axios from "axios";
+import { url } from "../globalConfig";
 
-const rows = [
+const rows_ = [
   {
     idPenjahit: 1,
     nama: "Nama Penjahit 1",
@@ -50,8 +52,18 @@ const rows = [
 ];
 
 export default function Pesanan() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rows, setRows] = useState([]);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  useEffect(() => {
+    getBahan();
+  }, [rows]);
+
+  const getBahan = async () => {
+    const response = await axios.get(url + "/bahan");
+    setRows(response.data);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -86,9 +98,9 @@ export default function Pesanan() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={row.name}>
-                    <TableCell align="center">{row.nama}</TableCell>
-                    <TableCell align="center">{row.pendapatan}</TableCell>
-                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">{row.idBahan}</TableCell>
+                    <TableCell align="center">{row.namaBahan}</TableCell>
+                    <TableCell align="center">{row.stokBahan}</TableCell>
                     <TableCell align="center">
                       <Button
                         variant="outlined"
