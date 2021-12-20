@@ -1,25 +1,21 @@
 .sidebar {
-  padding: 0 10px;
   height: 100vh;
-  flex: 0.2;
+  flex: 0.1;
   min-width: 230px;
   background-color: white;
 }
 
 .sidebar__logo {
-  margin-right: auto;
-  height: 70px;
-  font-size: 48px;
-  margin-left: 2rem;
-  margin-top: 2rem;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar__options {
   padding-left: 30px;
   height: 15vh;
-  margin-top: 2rem;
-  margin-left: 3rem;
-
+  margin-left: 1rem;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
