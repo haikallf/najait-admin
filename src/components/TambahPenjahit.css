@@ -42,3 +42,9 @@
   display: flex;
   justify-content: space-between;
 }
+.tambahPenjahit__submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
