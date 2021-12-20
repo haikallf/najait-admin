@@ -4,6 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useHistory } from "react-router-dom";
 import "./Sidebar.css";
+import Logo from "./Logo";
 
 function Sidebar() {
   const history = useHistory();
@@ -17,7 +18,10 @@ function Sidebar() {
 
   return (
     <div className="sidebar">
-      <div className="sidebar__logo">Najait</div>
+      {/* <div className="sidebar__logo">Najait</div> */}
+      <div className="sidebar__logo">
+        <Logo color="black" textColor="#266679" />
+      </div>
 
       <div className="sidebar__options">
         <div className="sidebar__option">

@@ -9,13 +9,17 @@
 .sidebar__logo {
   margin-right: auto;
   height: 70px;
-  padding: 10px;
   font-size: 48px;
+  margin-left: 2rem;
+  margin-top: 2rem;
 }
 
 .sidebar__options {
   padding-left: 30px;
   height: 15vh;
+  margin-top: 2rem;
+  margin-left: 3rem;
+
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
