@@ -34,10 +34,8 @@
   justify-content: space-between;
 }
 
-.tambahPenjahit__contactInfoTop {
-}
-
-.tambahPenjahit__contactInfoBottom {
+.tambahPenjahit__priceInfo,
+.tambahPenjahit__location {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;

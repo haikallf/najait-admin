@@ -3,7 +3,16 @@ import "./TambahPenjahit.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
-import { Button, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 export default function TambahPenjahit() {
   const TealTextField = styled(TextField)({
@@ -40,6 +49,12 @@ export default function TambahPenjahit() {
   //     backgroundColor: "#266679",
   //   },
   // }));
+
+  const [status, setStatus] = useState("AVAILABLE");
+
+  const handleStatus = (event) => {
+    setStatus(event.target.value);
+  };
 
   return (
     <div className="tambahPenjahit">
@@ -135,19 +150,25 @@ export default function TambahPenjahit() {
             />
             <TealTextField
               sx={{ flex: "0.49" }}
-              id="outlined-basic"
-              label="Nama Belakang"
-              variant="outlined"
-            />
+              label="Status"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={status}
+              onChange={handleStatus}
+              select
+            >
+              <MenuItem value="AVAILABLE">Available</MenuItem>
+              <MenuItem value="NOT AVAILABLE">Not Available</MenuItem>
+            </TealTextField>
           </div>
           <TealTextField
             fullWidth
             id="outlined-basic"
-            label="Email"
+            label="Deskripsi"
             variant="outlined"
           />
         </div>
-        <div className="tambahPenjahit__contactInfoTop">
+        <div className="tambahPenjahit__contactInfo">
           <p>Informasi Kontak</p>
           <TealTextField
             sx={{ width: "100%" }}
@@ -156,23 +177,31 @@ export default function TambahPenjahit() {
             variant="outlined"
           />
         </div>
-        <div className="tambahPenjahit__contactInfoBottom">
+        <div className="tambahPenjahit__priceInfo">
           <TealTextField
-            sx={{ flex: "0.32" }}
+            sx={{ flex: "0.49" }}
             id="outlined-basic"
-            label="Kota"
+            label="Harga Minimum"
             variant="outlined"
           />
           <TealTextField
-            sx={{ flex: "0.32" }}
+            sx={{ flex: "0.49" }}
             id="outlined-basic"
-            label="Provinsi"
+            label="Harga Maksimum"
+            variant="outlined"
+          />
+        </div>
+        <div className="tambahPenjahit__location">
+          <TealTextField
+            sx={{ flex: "0.49" }}
+            id="outlined-basic"
+            label="Lokasi Saat Ini"
             variant="outlined"
           />
           <TealTextField
-            sx={{ flex: "0.32" }}
+            sx={{ flex: "0.49" }}
             id="outlined-basic"
-            label="Kode Pos"
+            label="Lokasi Tersedia"
             variant="outlined"
           />
         </div>
