@@ -3,16 +3,7 @@ import "./TambahPenjahit.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Button, Grid, MenuItem, Typography } from "@mui/material";
 
 export default function TambahPenjahit() {
   const TealTextField = styled(TextField)({
