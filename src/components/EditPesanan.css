@@ -1,0 +1,42 @@
+/* style={{ fontSize: "24px", marginBottom: "30px", marginTop: "30px" }} */
+
+.editPesanan__top {
+  width: 100%;
+  font-size: 24px;
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editPesanan__form {
+  background-color: white;
+  border-radius: 10px;
+  height: 80vh;
+  width: 60vw;
+  border: 1px solid gray;
+  padding: 30px;
+}
+
+.editPesanan__single,
+.editPesanan__double {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.editPesanan__pesananInfo {
+  margin-bottom: 20px;
+}
+
+.editPesanan__pesananInfo > p {
+  color: #266679;
+  margin-bottom: 15px;
+}
+
+.editPesanan__submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}

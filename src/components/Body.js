@@ -5,6 +5,7 @@ import Penjahit from "./Penjahit";
 import Pesanan from "./Pesanan";
 import TambahPenjahit from "./TambahPenjahit";
 import EditPenjahit from "./EditPenjahit";
+import EditPesanan from "./EditPesanan";
 
 function Body() {
   return (
@@ -12,6 +13,7 @@ function Body() {
       <Switch>
         <Route exact path="/" component={Penjahit} />
         <Route path="/penjahit" component={Penjahit} />
+        <Route path="/editpesanan" component={EditPesanan} />
         <Route path="/pesanan" component={Pesanan} />
         <Route path="/tambahpenjahit" component={TambahPenjahit} />
         <Route path="/editpenjahit" component={EditPenjahit} />
