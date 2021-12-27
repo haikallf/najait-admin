@@ -13,7 +13,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid #266679",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 4,
 };
@@ -50,22 +51,24 @@ export default function PenjahitModal({
 
           <div className="penjahitModal__description">
             <p>Deskripsi: </p>
-            <p>{penjahit.description}</p>
+            <p style={{ textAlign: "justify", marginLeft: "10px" }}>
+              {penjahit.description}
+            </p>
           </div>
 
           <div className="penjahitModal__address">
             <p>Alamat: </p>
-            <p>{penjahit.address}</p>
+            <p style={{ marginLeft: "25px" }}>{penjahit.address}</p>
           </div>
 
           <div className="penjahitModal__price">
             <p>Harga Minimum: </p>
-            <p>{penjahit.price_range_max}</p>
+            <p style={{ marginLeft: "22px" }}>{penjahit.price_range_max}</p>
           </div>
 
           <div className="penjahitModal__price">
             <p>Harga Maksimum: </p>
-            <p>{penjahit.price_range_max}</p>
+            <p style={{ marginLeft: "10px" }}>{penjahit.price_range_max}</p>
           </div>
         </Box>
       </Modal>
