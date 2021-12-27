@@ -8,9 +8,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Modal, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { truncate } from "../globalConfig";
+import { Box } from "@mui/system";
+import PenjahitModal from "./PenjahitModal";
 
 const rows = [
   {
@@ -77,11 +79,19 @@ const avatarThumbnail = (penjahit) => {
   if (penjahit.picture) {
     return <Avatar alt={penjahit.name} src={penjahit.picture} />;
   } else {
-    return <Avatar>{penjahit.name.substring(0, 1)}</Avatar>;
+    return <Avatar>{penjahit?.name?.substring(0, 1)}</Avatar>;
   }
 };
 
 export default function Penjahit() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (index) => {
+    setCurrentPenjahit(rows[index]);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+  const [currentPenjahit, setCurrentPenjahit] = React.useState({});
+
   const history = useHistory();
 
   const goToTambahPenjahit = () => {
@@ -108,91 +118,106 @@ export default function Penjahit() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className="penjahit">
-      <div className="penjahit__up">
-        <div className="penjahit__title">PENJAHIT</div>
-        <Button
-          variant="contained"
-          style={{
-            borderColor: "#4abdac",
-            color: "#266679",
-            backgroundColor: "white",
-          }}
-          onClick={goToTambahPenjahit}
-        >
-          Tambah Penjahit
-        </Button>
-      </div>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "80vh" }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">ID Penjahit</TableCell>
-                <TableCell align="center">Nama Penjahit</TableCell>
-                <TableCell align="center">Deskripsi</TableCell>
-                <TableCell align="center">Alamat</TableCell>
-                <TableCell align="center">Harga Minimum</TableCell>
-                <TableCell align="center">Harga Maksimum</TableCell>
-                <TableCell align="center">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={row.id_penjahit}>
-                    <TableCell align="center">{row.id_penjahit}</TableCell>
-                    <TableCell align="center">
-                      <div className="penjahit__thumbnail">
-                        <div className="penjahit__thumbnailContainer">
-                          {avatarThumbnail(row)}
-                        </div>
-                        <div className="penjahit__thumbnailName">
-                          {row.name}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell align="center">
-                      {truncate(row.description, 20)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {truncate(row.address, 20)}
-                    </TableCell>
-                    <TableCell align="center">{row.price_range_min}</TableCell>
-                    <TableCell align="center">{row.price_range_max}</TableCell>
-                    <TableCell align="center">
-                      <Button
-                        variant="outlined"
-                        style={{
-                          borderColor: "#4abdac",
-                          color: "#4abdac",
-                        }}
-                        onClick={goToEditPenjahit}
-                      >
-                        Edit
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+    <>
+      <PenjahitModal
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        penjahit={currentPenjahit}
+      />
+      <div className="penjahit">
+        <div className="penjahit__up">
+          <div className="penjahit__title">PENJAHIT</div>
+          <Button
+            variant="contained"
+            style={{
+              borderColor: "#4abdac",
+              color: "#266679",
+              backgroundColor: "white",
+            }}
+            onClick={goToTambahPenjahit}
+          >
+            Tambah Penjahit
+          </Button>
+        </div>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: "80vh" }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID Penjahit</TableCell>
+                  <TableCell align="center">Nama Penjahit</TableCell>
+                  <TableCell align="center">Deskripsi</TableCell>
+                  <TableCell align="center">Alamat</TableCell>
+                  <TableCell align="center">Harga Minimum</TableCell>
+                  <TableCell align="center">Harga Maksimum</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow key={row.id_penjahit}>
+                      <TableCell align="center">{row.id_penjahit}</TableCell>
+                      <TableCell align="center">
+                        <div
+                          className="penjahit__thumbnail"
+                          onClick={() => handleOpen(index)}
+                        >
+                          <div className="penjahit__thumbnailContainer">
+                            {avatarThumbnail(row)}
+                          </div>
+                          <div className="penjahit__thumbnailName">
+                            {row.name}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell align="center">
+                        {truncate(row.description, 20)}
+                      </TableCell>
+                      <TableCell align="center">
+                        {truncate(row.address, 20)}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.price_range_min}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.price_range_max}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "#4abdac",
+                            color: "#4abdac",
+                          }}
+                          onClick={goToEditPenjahit}
+                        >
+                          Edit
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </div>
+    </>
   );
 }

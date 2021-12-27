@@ -1,0 +1,23 @@
+.penjahitModal__name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.penjahitModal__description {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.penjahitModal__address {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.penjahitModal__price {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
