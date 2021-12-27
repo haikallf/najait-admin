@@ -50,7 +50,7 @@ export default function TambahPenjahit() {
   return (
     <div className="editPenjahit">
       <div className="editPenjahit__top">
-        <div className="editPenjahit__title">TAMBAH PENJAHIT</div>
+        <div className="editPenjahit__title">EDIT PENJAHIT</div>
       </div>
 
       <div className="editPenjahit__form">
@@ -205,7 +205,7 @@ export default function TambahPenjahit() {
             }}
             component="span"
           >
-            Tambah Penjahit
+            Edit Penjahit
           </Button>
         </div>
       </div>

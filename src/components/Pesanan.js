@@ -12,58 +12,76 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { url } from "../globalConfig";
 
-const rows_ = [
+const rows = [
   {
-    idPenjahit: 1,
-    nama: "Nama Penjahit 1",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
   {
-    idPenjahit: 2,
-    nama: "Nama Penjahit 2",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
   {
-    idPenjahit: 3,
-    nama: "Nama Penjahit 3",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
   {
-    idPenjahit: 4,
-    nama: "Nama Penjahit 4",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
   {
-    idPenjahit: 5,
-    nama: "Nama Penjahit 5",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
   {
-    idPenjahit: 6,
-    nama: "Nama Penjahit 6",
-    pendapatan: 30000,
+    id_order: 1,
+    id_penjahit: 1,
+    id_user: 1,
+    jenis: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
     status: "PENDING",
   },
 ];
 
 export default function Pesanan() {
   const [page, setPage] = useState(0);
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  useEffect(() => {
-    getBahan();
-  }, [rows]);
+  // useEffect(() => {
+  //   getBahan();
+  // }, [rows]);
 
-  const getBahan = async () => {
-    const response = await axios.get(url + "/bahan");
-    setRows(response.data);
-  };
+  // const getBahan = async () => {
+  //   const response = await axios.get(url + "/bahan");
+  //   setRows(response.data);
+  // };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -88,8 +106,12 @@ export default function Pesanan() {
             <TableHead>
               <TableRow>
                 <TableCell align="center">ID Pesanan</TableCell>
-                <TableCell align="center">Nama Pemesan</TableCell>
-                <TableCell align="center">Harga</TableCell>
+                <TableCell align="center">ID Penjahit</TableCell>
+                <TableCell align="center">ID User</TableCell>
+                <TableCell align="center">Jenis</TableCell>
+                <TableCell align="center">Catatan</TableCell>
+                <TableCell align="center">Waktu Pesan</TableCell>
+                <TableCell align="center">Status</TableCell>
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
@@ -98,9 +120,13 @@ export default function Pesanan() {
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                   <TableRow key={row.name}>
-                    <TableCell align="center">{row.idBahan}</TableCell>
-                    <TableCell align="center">{row.namaBahan}</TableCell>
-                    <TableCell align="center">{row.stokBahan}</TableCell>
+                    <TableCell align="center">{row.id_order}</TableCell>
+                    <TableCell align="center">{row.id_penjahit}</TableCell>
+                    <TableCell align="center">{row.id_user}</TableCell>
+                    <TableCell align="center">{row.jenis}</TableCell>
+                    <TableCell align="center">{row.catatan}</TableCell>
+                    <TableCell align="center">{row.waktu_pesan}</TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
                     <TableCell align="center">
                       <Button
                         variant="outlined"
