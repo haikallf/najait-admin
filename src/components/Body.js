@@ -6,12 +6,19 @@ import Pesanan from "./Pesanan";
 import TambahPenjahit from "./TambahPenjahit";
 import EditPenjahit from "./EditPenjahit";
 import EditPesanan from "./EditPesanan";
+import Login from "./Login";
+import { useLocation } from "react-router-dom";
 
 function Body() {
+  const location = useLocation();
   return (
-    <div className="body">
+    <div
+      className="body"
+      style={location.pathname == "/login" ? { flex: 1 } : { flex: 0.9 }}
+    >
       <Switch>
         <Route exact path="/" component={Penjahit} />
+        <Route exact path="/login" component={Login} />
         <Route path="/penjahit" component={Penjahit} />
         <Route path="/editpesanan" component={EditPesanan} />
         <Route path="/pesanan" component={Pesanan} />

@@ -1,0 +1,30 @@
+.login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__formContainer {
+  height: 350px;
+  width: 400px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  background-color: white;
+  padding: 200px 50px;
+}
+
+.login__logo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__submitBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
