@@ -8,3 +8,18 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.penjahit__thumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.penjahit__thumbnailContainer {
+  margin-right: 10px;
+}
+
+.penjahit__thumbnailName {
+  color: black;
+}

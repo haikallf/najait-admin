@@ -8,47 +8,78 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { truncate } from "../globalConfig";
 
 const rows = [
   {
-    idPenjahit: 1,
-    nama: "Nama Penjahit 1",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 1,
+    name: "Nama Penjahit 1",
+    description: "LorEu quis ex do do ullamco sit cillum.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
   {
-    idPenjahit: 2,
-    nama: "Nama Penjahit 2",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 2,
+    name: "Nama Penjahit 2",
+    description:
+      "Excepteur excepteur nisi excepteur exercitation eiusmod ullamco do in cillum cupidatat amet.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
   {
-    idPenjahit: 3,
-    nama: "Nama Penjahit 3",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 3,
+    name: "Nama Penjahit 3",
+    description:
+      "Quis enim nostrud sit excepteur excepteur eu eiusmod tempor eu deserunt eu nulla.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
   {
-    idPenjahit: 4,
-    nama: "Nama Penjahit 4",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 4,
+    name: "Nama Penjahit 4",
+    description:
+      "Adipisicing labore cillum aliqua aliqua qui est voluptate sint ad exercitation nostrud incididunt sint ex.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
   {
-    idPenjahit: 5,
-    nama: "Nama Penjahit 5",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 5,
+    name: "Nama Penjahit 5",
+    description: "Dolore exercitation ipsum ad proident est qui in ea.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
   {
-    idPenjahit: 6,
-    nama: "Nama Penjahit 6",
-    pendapatan: 30000,
-    status: "PENDING",
+    id_penjahit: 6,
+    name: "Nama Penjahit 6",
+    description:
+      "Excepteur tempor eiusmod quis laborum quis dolor quis non amet magna elit officia ullamco quis.",
+    picture: null,
+    address: "Jl. Tebet Barat Dalam VA No 31",
+    price_range_min: 10000,
+    price_range_max: 30000,
   },
 ];
+
+const avatarThumbnail = (penjahit) => {
+  if (penjahit.picture) {
+    return <Avatar alt={penjahit.name} src={penjahit.picture} />;
+  } else {
+    return <Avatar>{penjahit.name.substring(0, 1)}</Avatar>;
+  }
+};
 
 export default function Penjahit() {
   const history = useHistory();
@@ -97,9 +128,12 @@ export default function Penjahit() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
+                <TableCell align="center">ID Penjahit</TableCell>
                 <TableCell align="center">Nama Penjahit</TableCell>
-                <TableCell align="center">Pendapatan</TableCell>
-                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">Deskripsi</TableCell>
+                <TableCell align="center">Alamat</TableCell>
+                <TableCell align="center">Harga Minimum</TableCell>
+                <TableCell align="center">Harga Maksimum</TableCell>
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
@@ -107,10 +141,26 @@ export default function Penjahit() {
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <TableRow key={row.name}>
-                    <TableCell align="center">{row.nama}</TableCell>
-                    <TableCell align="center">{row.pendapatan}</TableCell>
-                    <TableCell align="center">{row.status}</TableCell>
+                  <TableRow key={row.id_penjahit}>
+                    <TableCell align="center">{row.id_penjahit}</TableCell>
+                    <TableCell align="center">
+                      <div className="penjahit__thumbnail">
+                        <div className="penjahit__thumbnailContainer">
+                          {avatarThumbnail(row)}
+                        </div>
+                        <div className="penjahit__thumbnailName">
+                          {row.name}
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell align="center">
+                      {truncate(row.description, 20)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {truncate(row.address, 20)}
+                    </TableCell>
+                    <TableCell align="center">{row.price_range_min}</TableCell>
+                    <TableCell align="center">{row.price_range_max}</TableCell>
                     <TableCell align="center">
                       <Button
                         variant="outlined"
