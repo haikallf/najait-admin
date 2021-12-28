@@ -4,35 +4,42 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
+import TealTextField from "./TealTextField";
+import { useParams } from "react-router-dom";
+import { pesanan as rows } from "../globalConfig";
 
 export default function EditPesanan() {
-  const TealTextField = styled(TextField)({
-    "& label.Mui-focused": {
-      color: "#266679",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#266679",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#266679",
-      },
-      "&:hover fieldset": {
-        borderColor: "#266679",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#266679",
-      },
-    },
-  });
-
   // const TealButton = styled(Button)(() => ({
   //   "& .MuiButton-contained": {
   //     backgroundColor: "#266679",
   //   },
   // }));
 
-  const [status, setStatus] = useState("AVAILABLE");
+  const { id } = useParams();
+  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [jenis, setJenis] = useState("");
+  const [pakaian, setPakaian] = useState("");
+  const [catatan, setCatatan] = useState("");
+  const [waktu_pesan, setWaktu_pesan] = useState("");
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    getPesananById(id, rows);
+  }, []);
+
+  const getPesananById = (id, rows) => {
+    const pesanan = rows[id - 1];
+    setName(pesanan?.name);
+    setFirstName(pesanan?.firstName);
+    setLastName(pesanan?.lastName);
+    setJenis(pesanan?.jenis);
+    setPakaian(pesanan?.pakaian);
+    setCatatan(pesanan?.catatan);
+    setWaktu_pesan(pesanan.waktu_pesan);
+    setStatus(pesanan?.status);
+  };
 
   const handleStatus = (event) => {
     setStatus(event.target.value);
@@ -50,69 +57,114 @@ export default function EditPesanan() {
           <div className="editPesanan__double">
             <TealTextField
               sx={{ flex: "0.49" }}
-              id="outlined-basic"
+              id="id_order"
+              name="id_order"
               label="ID Order"
               variant="outlined"
+              disabled
+              value={id}
             />
             <TealTextField
               sx={{ flex: "0.49" }}
+              id="status"
+              name="status"
               label="Status"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={status}
               onChange={handleStatus}
               select
             >
-              <MenuItem value="AVAILABLE">Available</MenuItem>
-              <MenuItem value="NOT AVAILABLE">Not Available</MenuItem>
+              <MenuItem value="pending">Pending</MenuItem>
+              <MenuItem value="ongoing">Ongoing</MenuItem>
+              <MenuItem value="completed">Completed</MenuItem>
             </TealTextField>
           </div>
           <div className="editPesanan__single">
             <TealTextField
               fullWidth
-              id="outlined-basic"
+              id="name"
+              name="name"
               label="Nama Penjahit"
               variant="outlined"
-            />
-          </div>
-          <div className="editPesanan__single">
-            <TealTextField
-              fullWidth
-              id="outlined-basic"
-              label="Nama Pengguna"
-              variant="outlined"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </div>
           <div className="editPesanan__double">
             <TealTextField
               sx={{ flex: "0.49" }}
-              id="outlined-basic"
-              label="Jenis Reparasi"
+              id="firstName"
+              name="firstName"
+              label="Nama Depan Pengguna"
               variant="outlined"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
             />
             <TealTextField
               sx={{ flex: "0.49" }}
-              id="outlined-basic"
+              id="lastName"
+              name="lastName"
+              label="Nama Belakang Pengguna"
+              variant="outlined"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+          </div>
+          <div className="editPesanan__double">
+            <TealTextField
+              sx={{ flex: "0.49" }}
+              id="jenis"
+              name="jenis"
+              label="Jenis Reparasi"
+              variant="outlined"
+              value={jenis}
+              onChange={(e) => {
+                setJenis(e.target.value);
+              }}
+            />
+            <TealTextField
+              sx={{ flex: "0.49" }}
+              id="pakaian"
+              name="pakaian"
               label="Pakaian"
               variant="outlined"
+              value={pakaian}
+              onChange={(e) => {
+                setPakaian(e.target.value);
+              }}
             />
           </div>
           <div className="editPesanan__single">
             <TealTextField
               fullWidth
               multiline
-              rows={4}
-              id="outlined-basic"
+              rows={9}
+              id="catatan"
+              name="catatan"
               label="Catatan"
               variant="outlined"
+              value={catatan}
+              onChange={(e) => {
+                setCatatan(e.target.value);
+              }}
             />
           </div>
           <div className="editPesanan__single">
             <TealTextField
               fullWidth
-              id="outlined-basic"
+              id="waktu_pesan"
+              name="waktu_pesan"
               label="Waktu Pesan"
               variant="outlined"
+              value={waktu_pesan}
+              onChange={(e) => {
+                setWaktu_pesan(e.target.value);
+              }}
             />
           </div>
         </div>

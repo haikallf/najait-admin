@@ -20,7 +20,7 @@ function Body() {
         <Route exact path="/" component={Penjahit} />
         <Route exact path="/login" component={Login} />
         <Route path="/penjahit" component={Penjahit} />
-        <Route path="/editpesanan" component={EditPesanan} />
+        <Route path="/editpesanan/:id" component={EditPesanan} />
         <Route path="/pesanan" component={Pesanan} />
         <Route path="/tambahpenjahit" component={TambahPenjahit} />
         <Route path="/editpenjahit/:id" component={EditPenjahit} />

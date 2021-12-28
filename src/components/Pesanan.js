@@ -12,71 +12,11 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { url } from "../globalConfig";
 import AccepttModal from "./AcceptModal";
-
-const rows = [
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "pending",
-  },
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "pending",
-  },
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "ongoing",
-  },
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "ongoing",
-  },
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "ongoing",
-  },
-  {
-    id_order: 1,
-    id_penjahit: 1,
-    id_user: 1,
-    jenis: "Kemeja",
-    pakaian: "Kemeja",
-    catatan: "Potong 2cm",
-    waktu_pesan: "2021-21-21",
-    status: "pending",
-  },
-];
+import { pesanan as rows } from "../globalConfig";
+import { useHistory } from "react-router-dom";
 
 export default function Pesanan() {
+  const history = useHistory();
   const [page, setPage] = useState(0);
   // const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -86,7 +26,11 @@ export default function Pesanan() {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const [currentPenjahit, setCurrentPenjahit] = React.useState({});
+  const [currentPenjahit, setCurrentPenjahit] = useState({});
+
+  const goToEditPesanan = (id) => {
+    history.push(`/editpesanan/${id}`);
+  };
 
   // useEffect(() => {
   //   getBahan();
@@ -128,8 +72,8 @@ export default function Pesanan() {
               <TableHead>
                 <TableRow>
                   <TableCell align="center">ID Pesanan</TableCell>
-                  <TableCell align="center">ID Penjahit</TableCell>
-                  <TableCell align="center">ID User</TableCell>
+                  <TableCell align="center">Nama Penjahit</TableCell>
+                  <TableCell align="center">Nama Pengguna</TableCell>
                   <TableCell align="center">Jenis</TableCell>
                   <TableCell align="center">Pakaian</TableCell>
                   <TableCell align="center">Catatan</TableCell>
@@ -144,8 +88,10 @@ export default function Pesanan() {
                   .map((row, index) => (
                     <TableRow key={row.name}>
                       <TableCell align="center">{row.id_order}</TableCell>
-                      <TableCell align="center">{row.id_penjahit}</TableCell>
-                      <TableCell align="center">{row.id_user}</TableCell>
+                      <TableCell align="center">{row.name}</TableCell>
+                      <TableCell align="center">
+                        {row.firstName} {row.lastName}
+                      </TableCell>
                       <TableCell align="center">{row.jenis}</TableCell>
                       <TableCell align="center">{row.pakaian}</TableCell>
                       <TableCell align="center">{row.catatan}</TableCell>
@@ -174,6 +120,7 @@ export default function Pesanan() {
                               width: "90px",
                               height: "40px",
                             }}
+                            onClick={() => goToEditPesanan(row.id_order)}
                           >
                             Edit
                           </Button>

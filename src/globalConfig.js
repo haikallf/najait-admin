@@ -61,6 +61,75 @@ exports.penjahit = [
   },
 ];
 
+exports.pesanan = [
+  {
+    id_order: 1,
+    name: "Nama Penjahit 1",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "pending",
+  },
+  {
+    id_order: 2,
+    name: "Nama Penjahit 2",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "pending",
+  },
+  {
+    id_order: 3,
+    name: "Nama Penjahit 3",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "ongoing",
+  },
+  {
+    id_order: 4,
+    name: "Nama Penjahit 4",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "ongoing",
+  },
+  {
+    id_order: 5,
+    name: "Nama Penjahit 5",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "ongoing",
+  },
+  {
+    id_order: 6,
+    name: "Nama Penjahit 6",
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jenis: "Kemeja",
+    pakaian: "Kemeja",
+    catatan: "Potong 2cm",
+    waktu_pesan: "2021-21-21",
+    status: "pending",
+  },
+];
+
 // exports.truncate = (input) =>
 //   input.length > 5 ? `${input.substring(0, 5)}...` : input;
 
