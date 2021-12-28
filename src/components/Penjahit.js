@@ -98,8 +98,8 @@ export default function Penjahit() {
     history.push("/tambahpenjahit");
   };
 
-  const goToEditPenjahit = () => {
-    history.push("/editpenjahit");
+  const goToEditPenjahit = (id) => {
+    history.push(`/editpenjahit/${id}`);
   };
 
   const [page, setPage] = React.useState(0);
@@ -194,7 +194,7 @@ export default function Penjahit() {
                             width: "90px",
                             height: "40px",
                           }}
-                          onClick={goToEditPenjahit}
+                          onClick={() => goToEditPenjahit(row.id_penjahit)}
                         >
                           Edit
                         </Button>

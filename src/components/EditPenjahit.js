@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./EditPenjahit.css";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
+import TealTextField from "./TealTextField";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { penjahit as rows } from "../globalConfig";
 
 export default function TambahPenjahit() {
-  const TealTextField = styled(TextField)({
-    "& label.Mui-focused": {
-      color: "#266679",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#266679",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#266679",
-      },
-      "&:hover fieldset": {
-        borderColor: "#266679",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#266679",
-      },
-    },
-  });
+  const { id } = useParams();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [picture, setPicture] = useState(null);
+  const [address, setAddress] = useState("");
+  const [price_range_min, setPrice_range_min] = useState("");
+  const [price_range_max, setPrice_range_max] = useState("");
+  const [current_location, setCurrent_location] = useState("");
+  const [available_location, setAvailable_location] = useState("");
+  const [status, setStatus] = useState("AVAILABLE");
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -35,16 +27,31 @@ export default function TambahPenjahit() {
     }
   }, [selectedImage]);
 
+  useEffect(() => {
+    getPenjahitById(id, rows);
+  }, []);
+
   // const TealButton = styled(Button)(() => ({
   //   "& .MuiButton-contained": {
   //     backgroundColor: "#266679",
   //   },
   // }));
 
-  const [status, setStatus] = useState("AVAILABLE");
-
   const handleStatus = (event) => {
     setStatus(event.target.value);
+  };
+
+  const getPenjahitById = (id, rows) => {
+    const penjahit = rows[id - 1];
+    setName(penjahit?.name);
+    setDescription(penjahit?.description);
+    setPicture(penjahit?.picture);
+    setAddress(penjahit?.address);
+    setPrice_range_min(penjahit?.price_range_min);
+    setPrice_range_max(penjahit?.price_range_max);
+    setCurrent_location(penjahit?.current_location);
+    setAvailable_location(penjahit?.available_location);
+    setStatus(penjahit?.status);
   };
 
   return (
@@ -135,15 +142,20 @@ export default function TambahPenjahit() {
           <div className="editPenjahit__userInfoNama">
             <TealTextField
               sx={{ flex: "0.49" }}
-              id="outlined-basic"
-              label="Nama Depan"
+              id="name"
+              name="name"
+              label="Nama Penjahit"
               variant="outlined"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
             <TealTextField
               sx={{ flex: "0.49" }}
+              id="status"
+              name="status"
               label="Status"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={status}
               onChange={handleStatus}
               select
@@ -154,46 +166,77 @@ export default function TambahPenjahit() {
           </div>
           <TealTextField
             fullWidth
-            id="outlined-basic"
+            id="description"
+            name="description"
             label="Deskripsi"
             variant="outlined"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
           />
         </div>
         <div className="editPenjahit__contactInfo">
           <p>Informasi Kontak</p>
           <TealTextField
             sx={{ width: "100%" }}
-            id="outlined-basic"
+            id="address"
+            name="address"
             label="Alamat"
             variant="outlined"
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
           />
         </div>
         <div className="editPenjahit__priceInfo">
           <TealTextField
             sx={{ flex: "0.49" }}
-            id="outlined-basic"
+            id="price_range_min"
+            name="price_range_min"
             label="Harga Minimum"
             variant="outlined"
+            value={price_range_min}
+            onChange={(e) => {
+              setPrice_range_min(e.target.value);
+            }}
           />
           <TealTextField
             sx={{ flex: "0.49" }}
-            id="outlined-basic"
+            id="price_range_max"
+            name="price_range_max"
             label="Harga Maksimum"
             variant="outlined"
+            value={price_range_max}
+            onChange={(e) => {
+              setPrice_range_max(e.target.value);
+            }}
           />
         </div>
         <div className="editPenjahit__location">
           <TealTextField
             sx={{ flex: "0.49" }}
-            id="outlined-basic"
+            id="current_location"
+            name="current_location"
             label="Lokasi Saat Ini"
             variant="outlined"
+            value={current_location}
+            onChange={(e) => {
+              setCurrent_location(e.target.value);
+            }}
           />
+
           <TealTextField
             sx={{ flex: "0.49" }}
-            id="outlined-basic"
+            id="available_location"
+            name="available_location"
             label="Lokasi Tersedia"
             variant="outlined"
+            value={available_location}
+            onChange={(e) => {
+              setAvailable_location(e.target.value);
+            }}
           />
         </div>
         <div className="editPenjahit__submitButton">

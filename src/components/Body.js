@@ -23,7 +23,7 @@ function Body() {
         <Route path="/editpesanan" component={EditPesanan} />
         <Route path="/pesanan" component={Pesanan} />
         <Route path="/tambahpenjahit" component={TambahPenjahit} />
-        <Route path="/editpenjahit" component={EditPenjahit} />
+        <Route path="/editpenjahit/:id" component={EditPenjahit} />
       </Switch>
     </div>
   );
