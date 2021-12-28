@@ -16,7 +16,7 @@ export default function TambahPenjahit() {
   const [price_range_max, setPrice_range_max] = useState("");
   const [current_location, setCurrent_location] = useState("");
   const [available_location, setAvailable_location] = useState("");
-  const [status, setStatus] = useState("AVAILABLE");
+  const [status, setStatus] = useState("available");
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -160,8 +160,8 @@ export default function TambahPenjahit() {
               onChange={handleStatus}
               select
             >
-              <MenuItem value="AVAILABLE">Available</MenuItem>
-              <MenuItem value="NOT AVAILABLE">Not Available</MenuItem>
+              <MenuItem value="available">Available</MenuItem>
+              <MenuItem value="unavailable">Not Available</MenuItem>
             </TealTextField>
           </div>
           <TealTextField
@@ -226,7 +226,6 @@ export default function TambahPenjahit() {
               setCurrent_location(e.target.value);
             }}
           />
-
           <TealTextField
             sx={{ flex: "0.49" }}
             id="available_location"
