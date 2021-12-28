@@ -1,12 +1,13 @@
 import React from "react";
 import "./Login.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import Logo from "./Logo";
 
 function Login() {
   const location = useLocation();
+  const history = useHistory();
   const TealTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "#266679",
@@ -31,7 +32,7 @@ function Login() {
     <>
       <div className="login">
         <div className="login__formContainer">
-          <div className="login__logo">
+          <div className="login__logo" onClick={() => history.push("/")}>
             <Logo color="black" textColor="#266679" />
           </div>
           <div className="login__form">
@@ -64,6 +65,7 @@ function Login() {
                 sx={{
                   backgroundColor: "#266679",
                   "&:hover": { backgroundColor: "#266679" },
+                  my: 2,
                 }}
                 component="span"
               >
