@@ -20,7 +20,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "pending",
   },
   {
     id_order: 1,
@@ -29,7 +29,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "pending",
   },
   {
     id_order: 1,
@@ -38,7 +38,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "ongoing",
   },
   {
     id_order: 1,
@@ -47,7 +47,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "ongoing",
   },
   {
     id_order: 1,
@@ -56,7 +56,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "ongoing",
   },
   {
     id_order: 1,
@@ -65,7 +65,7 @@ const rows = [
     jenis: "Kemeja",
     catatan: "Potong 2cm",
     waktu_pesan: "2021-21-21",
-    status: "PENDING",
+    status: "pending",
   },
 ];
 
@@ -128,15 +128,31 @@ export default function Pesanan() {
                     <TableCell align="center">{row.waktu_pesan}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
                     <TableCell align="center">
-                      <Button
-                        variant="outlined"
-                        style={{
-                          borderColor: "#4abdac",
-                          color: "#4abdac",
-                        }}
-                      >
-                        Edit
-                      </Button>
+                      {row.status == "pending" ? (
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "#4abdac",
+                            color: "#4abdac",
+                            width: "90px",
+                            height: "40px",
+                          }}
+                        >
+                          Accept
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "#4abdac",
+                            color: "#4abdac",
+                            width: "90px",
+                            height: "40px",
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

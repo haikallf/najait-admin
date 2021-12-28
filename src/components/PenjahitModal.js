@@ -59,7 +59,9 @@ export default function PenjahitModal({
 
           <div className="penjahitModal__address">
             <p>Alamat: </p>
-            <p style={{ marginLeft: "25px" }}>{penjahit.address}</p>
+            <p style={{ textAlign: "justify", marginLeft: "25px" }}>
+              {penjahit.address}
+            </p>
           </div>
 
           <div className="penjahitModal__price">

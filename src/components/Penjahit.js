@@ -191,10 +191,24 @@ export default function Penjahit() {
                           style={{
                             borderColor: "#4abdac",
                             color: "#4abdac",
+                            width: "90px",
+                            height: "40px",
                           }}
                           onClick={goToEditPenjahit}
                         >
                           Edit
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          style={{
+                            borderColor: "#781D42",
+                            color: "#781D42",
+                            width: "90px",
+                            height: "40px",
+                          }}
+                          onClick={goToEditPenjahit}
+                        >
+                          Delete
                         </Button>
                       </TableCell>
                     </TableRow>
