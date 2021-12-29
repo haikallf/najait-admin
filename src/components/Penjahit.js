@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import "./Penjahit.css";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,9 +10,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Avatar, Button, Modal, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import { truncate } from "../globalConfig";
+import { truncate, url } from "../globalConfig";
 import { Box } from "@mui/system";
 import PenjahitModal from "./PenjahitModal";
+import axios from "axios";
 
 const rows = [
   {
@@ -84,6 +85,19 @@ const avatarThumbnail = (penjahit) => {
 };
 
 export default function Penjahit() {
+  const [rows, setRows] = useState([]);
+  useEffect(() => {
+    getPenjahit();
+  }, [rows]);
+
+  const getPenjahit = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(url + "/penjahit", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setRows(response.data);
+    console.log(rows);
+  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = (index) => {
     setCurrentPenjahit(rows[index]);

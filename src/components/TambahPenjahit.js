@@ -5,8 +5,12 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import TealTextField from "./TealTextField";
+import axios from "axios";
+import { url } from "../globalConfig";
+import { useHistory } from "react-router-dom";
 
 export default function TambahPenjahit() {
+  const history = useHistory();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -19,6 +23,44 @@ export default function TambahPenjahit() {
   const [current_location, setCurrent_location] = useState("");
   const [available_location, setAvailable_location] = useState("");
   const [status, setStatus] = useState("available");
+
+  const addPenjahit = () => {
+    console.log(description);
+    if (
+      name == "" ||
+      description == "" ||
+      address == "" ||
+      price_range_min == "" ||
+      price_range_max == "" ||
+      current_location == "" ||
+      available_location == ""
+    ) {
+      alert("Tidak boleh ada field yang kosong!");
+    } else {
+      const token = localStorage.getItem("token");
+      axios
+        .post(
+          url + `/penjahit`,
+          {
+            name: name,
+            picture: picture,
+            description: description,
+            address: address,
+            price_range_min: parseInt(price_range_min),
+            price_range_max: parseInt(price_range_max),
+            current_location: current_location,
+            available_location: available_location,
+            status: status,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then(function (response) {
+          history.push("/penjahit");
+          return response;
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   useEffect(() => {
     if (selectedImage) {
@@ -143,7 +185,7 @@ export default function TambahPenjahit() {
               select
             >
               <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="unavailable">Not Available</MenuItem>
+              <MenuItem value="unavailable">Unavailable</MenuItem>
             </TealTextField>
           </div>
           <TealTextField
@@ -151,6 +193,10 @@ export default function TambahPenjahit() {
             id="outlined-basic"
             label="Deskripsi"
             variant="outlined"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
           />
         </div>
         <div className="tambahPenjahit__contactInfo">
@@ -174,6 +220,7 @@ export default function TambahPenjahit() {
             name="price_range_min"
             label="Harga Minimum"
             variant="outlined"
+            type="number"
             value={price_range_min}
             onChange={(e) => {
               setPrice_range_min(e.target.value);
@@ -185,6 +232,7 @@ export default function TambahPenjahit() {
             name="price_range_max"
             label="Harga Maksimum"
             variant="outlined"
+            type="number"
             value={price_range_max}
             onChange={(e) => {
               setPrice_range_max(e.target.value);
@@ -223,6 +271,7 @@ export default function TambahPenjahit() {
               "&:hover": { backgroundColor: "#266679" },
             }}
             component="span"
+            onClick={addPenjahit}
           >
             Tambah Penjahit
           </Button>

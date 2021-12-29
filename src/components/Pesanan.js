@@ -12,13 +12,13 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { url } from "../globalConfig";
 import AccepttModal from "./AcceptModal";
-import { pesanan as rows } from "../globalConfig";
+// import { pesanan as rows } from "../globalConfig";
 import { useHistory } from "react-router-dom";
 
 export default function Pesanan() {
   const history = useHistory();
   const [page, setPage] = useState(0);
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [open, setOpen] = React.useState(false);
@@ -32,14 +32,18 @@ export default function Pesanan() {
     history.push(`/editpesanan/${id}`);
   };
 
-  // useEffect(() => {
-  //   getBahan();
-  // }, [rows]);
+  useEffect(() => {
+    getOrder();
+  }, [rows]);
 
-  // const getBahan = async () => {
-  //   const response = await axios.get(url + "/bahan");
-  //   setRows(response.data);
-  // };
+  const getOrder = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(url + "/order", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setRows(response.data);
+    console.log(rows);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

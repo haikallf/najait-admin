@@ -23,6 +23,8 @@ function Login() {
           password: password,
         })
         .then(function (response) {
+          console.log(response);
+          localStorage.setItem("token", response.data.accessToken);
           history.push("/");
           return response;
         })
@@ -77,7 +79,6 @@ function Login() {
                   "&:hover": { backgroundColor: "#266679" },
                   my: 2,
                 }}
-                component="span"
                 onClick={handleLogin}
               >
                 Login

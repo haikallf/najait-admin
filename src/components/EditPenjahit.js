@@ -4,10 +4,12 @@ import Box from "@mui/material/Box";
 import TealTextField from "./TealTextField";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { penjahit as rows } from "../globalConfig";
+import { penjahit as rows, url } from "../globalConfig";
+import axios from "axios";
 
 export default function TambahPenjahit() {
   const { id } = useParams();
+  const [currentPenjahit, setCurrentPenjahit] = useState({});
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState(null);
@@ -28,21 +30,16 @@ export default function TambahPenjahit() {
   }, [selectedImage]);
 
   useEffect(() => {
-    getPenjahitById(id, rows);
-  }, []);
+    getPenjahitById(id);
+  }, [currentPenjahit]);
 
-  // const TealButton = styled(Button)(() => ({
-  //   "& .MuiButton-contained": {
-  //     backgroundColor: "#266679",
-  //   },
-  // }));
-
-  const handleStatus = (event) => {
-    setStatus(event.target.value);
-  };
-
-  const getPenjahitById = (id, rows) => {
-    const penjahit = rows[id - 1];
+  const getPenjahitById = async (id) => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(url + `/penjahit/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setCurrentPenjahit(response.data);
+    const penjahit = currentPenjahit;
     setName(penjahit?.name);
     setDescription(penjahit?.description);
     setPicture(penjahit?.picture);
@@ -52,6 +49,16 @@ export default function TambahPenjahit() {
     setCurrent_location(penjahit?.current_location);
     setAvailable_location(penjahit?.available_location);
     setStatus(penjahit?.status);
+  };
+
+  // const TealButton = styled(Button)(() => ({
+  //   "& .MuiButton-contained": {
+  //     backgroundColor: "#266679",
+  //   },
+  // }));
+
+  const handleStatus = (event) => {
+    setStatus(event.target.value);
   };
 
   return (
