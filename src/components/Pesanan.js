@@ -118,31 +118,61 @@ export default function Pesanan() {
                       </TableCell>
                       <TableCell align="center">
                         {row.inbound.status == "pending" ? (
-                          <Button
-                            onClick={handleOpen}
-                            variant="outlined"
-                            style={{
-                              borderColor: "#4abdac",
-                              color: "#4abdac",
-                              width: "90px",
-                              height: "40px",
-                            }}
-                          >
-                            Accept
-                          </Button>
+                          <>
+                            <Button
+                              variant="outlined"
+                              style={{
+                                borderColor: "#4abdac",
+                                color: "#4abdac",
+                                width: "90px",
+                                height: "40px",
+                                marginRight: "10px",
+                              }}
+                              onClick={() => goToEditPesanan(row.id_order)}
+                            >
+                              Details
+                            </Button>
+                            <Button
+                              onClick={handleOpen}
+                              variant="outlined"
+                              style={{
+                                borderColor: "#4abdac",
+                                color: "#4abdac",
+                                width: "90px",
+                                height: "40px",
+                              }}
+                            >
+                              Accept
+                            </Button>
+                          </>
                         ) : (
-                          <Button
-                            variant="outlined"
-                            style={{
-                              borderColor: "#4abdac",
-                              color: "#4abdac",
-                              width: "90px",
-                              height: "40px",
-                            }}
-                            onClick={() => goToEditPesanan(row.id_order)}
-                          >
-                            Edit
-                          </Button>
+                          <>
+                            <Button
+                              variant="outlined"
+                              style={{
+                                borderColor: "#4abdac",
+                                color: "#4abdac",
+                                width: "90px",
+                                height: "40px",
+                                marginRight: "10px",
+                              }}
+                              onClick={() => goToEditPesanan(row.id_order)}
+                            >
+                              Details
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              style={{
+                                borderColor: "#4abdac",
+                                color: "#4abdac",
+                                width: "90px",
+                                height: "40px",
+                              }}
+                              onClick={() => goToEditPesanan(row.id_order)}
+                            >
+                              Complete
+                            </Button>
+                          </>
                         )}
                       </TableCell>
                     </TableRow>
