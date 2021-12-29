@@ -117,21 +117,20 @@ export default function Pesanan() {
                         {row.inbound?.status}
                       </TableCell>
                       <TableCell align="center">
+                        <Button
+                          variant="contained"
+                          style={{
+                            backgroundColor: "#4abdac",
+                            width: "90px",
+                            height: "40px",
+                            marginRight: "10px",
+                          }}
+                          onClick={() => goToEditPesanan(row.id_order)}
+                        >
+                          Details
+                        </Button>
                         {row.inbound.status == "pending" ? (
                           <>
-                            <Button
-                              variant="outlined"
-                              style={{
-                                borderColor: "#4abdac",
-                                color: "#4abdac",
-                                width: "90px",
-                                height: "40px",
-                                marginRight: "10px",
-                              }}
-                              onClick={() => goToEditPesanan(row.id_order)}
-                            >
-                              Details
-                            </Button>
                             <Button
                               onClick={handleOpen}
                               variant="outlined"
@@ -147,19 +146,6 @@ export default function Pesanan() {
                           </>
                         ) : (
                           <>
-                            <Button
-                              variant="outlined"
-                              style={{
-                                borderColor: "#4abdac",
-                                color: "#4abdac",
-                                width: "90px",
-                                height: "40px",
-                                marginRight: "10px",
-                              }}
-                              onClick={() => goToEditPesanan(row.id_order)}
-                            >
-                              Details
-                            </Button>
                             <Button
                               variant="outlined"
                               style={{

@@ -215,19 +215,6 @@ export default function EditPesanan() {
             />
           </div>
         </div>
-
-        <div className="editPesanan__submitButton">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#266679",
-              "&:hover": { backgroundColor: "#266679" },
-            }}
-            component="span"
-          >
-            Edit Pesanan
-          </Button>
-        </div>
       </div>
     </div>
   );
