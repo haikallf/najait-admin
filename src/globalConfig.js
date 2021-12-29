@@ -1,4 +1,4 @@
-exports.url = "http://localhost:3001";
+exports.url = "http://localhost:4000";
 
 exports.penjahit = [
   {

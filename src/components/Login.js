@@ -1,32 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { useLocation, useHistory } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
-import styled from "@emotion/styled";
+import axios from "axios";
 import Logo from "./Logo";
+import TealTextField from "./TealTextField";
+import { url } from "../globalConfig";
 
 function Login() {
   const location = useLocation();
   const history = useHistory();
-  const TealTextField = styled(TextField)({
-    "& label.Mui-focused": {
-      color: "#266679",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#266679",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#266679",
-      },
-      "&:hover fieldset": {
-        borderColor: "#266679",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#266679",
-      },
-    },
-  });
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleLogin = () => {
+    if (email == null || email == "" || password == null || password == "") {
+      alert("Tidak boleh ada field yang kosong!");
+    } else {
+      axios
+        .post(url + `/admin/login`, {
+          email: email,
+          password: password,
+        })
+        .then(function (response) {
+          history.push("/");
+          return response;
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <>
@@ -38,17 +40,21 @@ function Login() {
           <div className="login__form">
             <TealTextField
               fullWidth
-              label="Username"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              id="email"
+              name="email"
+              label="Email"
               autoComplete="off"
               sx={{ my: 2 }}
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <TealTextField
               fullWidth
+              id="password"
+              name="password"
               label="Password"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               type="password"
               inputProps={{
                 autocomplete: "new-password",
@@ -57,6 +63,10 @@ function Login() {
                 },
               }}
               sx={{ my: 2 }}
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
 
             <div className="login__submitBtn">
@@ -68,6 +78,7 @@ function Login() {
                   my: 2,
                 }}
                 component="span"
+                onClick={handleLogin}
               >
                 Login
               </Button>
