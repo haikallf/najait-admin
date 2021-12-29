@@ -6,10 +6,11 @@ import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { penjahit as rows, url } from "../globalConfig";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function TambahPenjahit() {
   const { id } = useParams();
-  const [currentPenjahit, setCurrentPenjahit] = useState({});
+  const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState(null);
@@ -23,6 +24,10 @@ export default function TambahPenjahit() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
+  const handleStatus = (event) => {
+    setStatus(event.target.value);
+  };
+
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
@@ -30,25 +35,49 @@ export default function TambahPenjahit() {
   }, [selectedImage]);
 
   useEffect(() => {
-    getPenjahitById(id);
-  }, [currentPenjahit]);
+    getPenjahitById();
+  }, []);
 
-  const getPenjahitById = async (id) => {
+  const getPenjahitById = async () => {
     const token = localStorage.getItem("token");
+    console.log("Checkpoint 1");
     const response = await axios.get(url + `/penjahit/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    setCurrentPenjahit(response.data);
-    const penjahit = currentPenjahit;
-    setName(penjahit?.name);
-    setDescription(penjahit?.description);
-    setPicture(penjahit?.picture);
-    setAddress(penjahit?.address);
-    setPrice_range_min(penjahit?.price_range_min);
-    setPrice_range_max(penjahit?.price_range_max);
-    setCurrent_location(penjahit?.current_location);
-    setAvailable_location(penjahit?.available_location);
-    setStatus(penjahit?.status);
+    setName(response.data.name);
+    setDescription(response.data.description);
+    setPicture(response.data.picture);
+    setAddress(response.data.address);
+    setPrice_range_min(response.data.price_range_min);
+    setPrice_range_max(response.data?.price_range_max);
+    setCurrent_location(response.data?.current_location);
+    setAvailable_location(response.data?.available_location);
+    setStatus(response.data?.status);
+  };
+
+  const editPenjahitById = async (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        url + `/penjahit/${id}`,
+        {
+          name: name,
+          picture: picture,
+          description: description,
+          address: address,
+          price_range_min: parseInt(price_range_min),
+          price_range_max: parseInt(price_range_max),
+          current_location: current_location,
+          available_location: available_location,
+          status: status,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then(function (response) {
+        history.push("/penjahit");
+        return response;
+      })
+      .catch((err) => console.log(err));
   };
 
   // const TealButton = styled(Button)(() => ({
@@ -56,10 +85,6 @@ export default function TambahPenjahit() {
   //     backgroundColor: "#266679",
   //   },
   // }));
-
-  const handleStatus = (event) => {
-    setStatus(event.target.value);
-  };
 
   return (
     <div className="editPenjahit">
@@ -168,7 +193,7 @@ export default function TambahPenjahit() {
               select
             >
               <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="unavailable">Not Available</MenuItem>
+              <MenuItem value="unavailable">Uvailable</MenuItem>
             </TealTextField>
           </div>
           <TealTextField
@@ -252,7 +277,7 @@ export default function TambahPenjahit() {
               backgroundColor: "#266679",
               "&:hover": { backgroundColor: "#266679" },
             }}
-            component="span"
+            onClick={() => editPenjahitById(id)}
           >
             Edit Penjahit
           </Button>
