@@ -44,6 +44,7 @@ export default function TambahPenjahit() {
     const response = await axios.get(url + `/penjahit/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+    console.log(response.data);
     setName(response.data.name);
     setDescription(response.data.description);
     setPicture(response.data.picture);
@@ -52,7 +53,7 @@ export default function TambahPenjahit() {
     setPrice_range_max(response.data?.price_range_max);
     setCurrent_location(response.data?.current_location);
     setAvailable_location(response.data?.available_location);
-    setStatus(response.data?.status);
+    setStatus(response.data?.statuspenjahit.status);
   };
 
   const editPenjahitById = async (id) => {
@@ -193,7 +194,7 @@ export default function TambahPenjahit() {
               select
             >
               <MenuItem value="available">Available</MenuItem>
-              <MenuItem value="unavailable">Uvailable</MenuItem>
+              <MenuItem value="unavailable">Unavailable</MenuItem>
             </TealTextField>
           </div>
           <TealTextField
