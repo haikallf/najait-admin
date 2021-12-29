@@ -40,7 +40,6 @@ export default function TambahPenjahit() {
 
   const getPenjahitById = async () => {
     const token = localStorage.getItem("token");
-    console.log("Checkpoint 1");
     const response = await axios.get(url + `/penjahit/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

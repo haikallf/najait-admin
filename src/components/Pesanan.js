@@ -21,6 +21,8 @@ export default function Pesanan() {
   const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [currentName, setCurrentName] = useState("");
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -42,7 +44,16 @@ export default function Pesanan() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRows(response.data);
-    console.log(rows);
+    console.log(response.data);
+  };
+
+  const getNamaPenjahitById = (id) => {
+    const token = localStorage.getItem("token");
+    const response = axios.get(url + `/penjahit/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    response.then((res) => setCurrentName(res.data.name));
+    return currentName;
   };
 
   const handleChangePage = (event, newPage) => {
@@ -92,17 +103,21 @@ export default function Pesanan() {
                   .map((row, index) => (
                     <TableRow key={row.name}>
                       <TableCell align="center">{row.id_order}</TableCell>
-                      <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">
-                        {row.firstName} {row.lastName}
+                        {row.inbound.inboundIdPenjahit
+                          ? getNamaPenjahitById(row.inbound.inboundIdPenjahit)
+                          : "Kosong"}
                       </TableCell>
+                      <TableCell align="center">{row.User.email}</TableCell>
                       <TableCell align="center">{row.jenis}</TableCell>
                       <TableCell align="center">{row.pakaian}</TableCell>
                       <TableCell align="center">{row.catatan}</TableCell>
                       <TableCell align="center">{row.waktu_pesan}</TableCell>
-                      <TableCell align="center">{row.status}</TableCell>
                       <TableCell align="center">
-                        {row.status == "pending" ? (
+                        {row.inbound?.status}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.inbound.status == "pending" ? (
                           <Button
                             onClick={handleOpen}
                             variant="outlined"
