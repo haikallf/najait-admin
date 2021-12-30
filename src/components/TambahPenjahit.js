@@ -31,9 +31,7 @@ export default function TambahPenjahit() {
       description == "" ||
       address == "" ||
       price_range_min == "" ||
-      price_range_max == "" ||
-      current_location == "" ||
-      available_location == ""
+      price_range_max == ""
     ) {
       alert("Tidak boleh ada field yang kosong!");
     } else {
@@ -190,6 +188,8 @@ export default function TambahPenjahit() {
           </div>
           <TealTextField
             fullWidth
+            multiline
+            rows={4}
             id="outlined-basic"
             label="Deskripsi"
             variant="outlined"
@@ -236,30 +236,6 @@ export default function TambahPenjahit() {
             value={price_range_max}
             onChange={(e) => {
               setPrice_range_max(e.target.value);
-            }}
-          />
-        </div>
-        <div className="tambahPenjahit__location">
-          <TealTextField
-            sx={{ flex: "0.49" }}
-            id="current_location"
-            name="current_location"
-            label="Lokasi Saat Ini"
-            variant="outlined"
-            value={current_location}
-            onChange={(e) => {
-              setCurrent_location(e.target.value);
-            }}
-          />
-          <TealTextField
-            sx={{ flex: "0.49" }}
-            id="available_location"
-            name="available_location"
-            label="Lokasi Tersedia"
-            variant="outlined"
-            value={available_location}
-            onChange={(e) => {
-              setAvailable_location(e.target.value);
             }}
           />
         </div>

@@ -8,73 +8,85 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Avatar, Button, Modal, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Modal,
+  Typography,
+} from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { truncate, url } from "../globalConfig";
 import { Box } from "@mui/system";
 import PenjahitModal from "./PenjahitModal";
 import axios from "axios";
 
-const rows = [
-  {
-    id_penjahit: 1,
-    name: "Nama Penjahit 1",
-    description: "LorEu quis ex do do ullamco sit cillum.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-  {
-    id_penjahit: 2,
-    name: "Nama Penjahit 2",
-    description:
-      "Excepteur excepteur nisi excepteur exercitation eiusmod ullamco do in cillum cupidatat amet.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-  {
-    id_penjahit: 3,
-    name: "Nama Penjahit 3",
-    description:
-      "Quis enim nostrud sit excepteur excepteur eu eiusmod tempor eu deserunt eu nulla.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-  {
-    id_penjahit: 4,
-    name: "Nama Penjahit 4",
-    description:
-      "Adipisicing labore cillum aliqua aliqua qui est voluptate sint ad exercitation nostrud incididunt sint ex.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-  {
-    id_penjahit: 5,
-    name: "Nama Penjahit 5",
-    description: "Dolore exercitation ipsum ad proident est qui in ea.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-  {
-    id_penjahit: 6,
-    name: "Nama Penjahit 6",
-    description:
-      "Excepteur tempor eiusmod quis laborum quis dolor quis non amet magna elit officia ullamco quis.",
-    picture: null,
-    address: "Jl. Tebet Barat Dalam VA No 31",
-    price_range_min: 10000,
-    price_range_max: 30000,
-  },
-];
+const DeletePenjahitModal = ({ name, id }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const deletePenjahitById = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(url + `/penjahit/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .catch((err) => console.log(err));
+    handleClose();
+  };
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        style={{
+          borderColor: "#266679",
+          color: "#266679",
+          width: "90px",
+          height: "40px",
+        }}
+        onClick={handleClickOpen}
+      >
+        Delete
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Hapus Penjahit"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {`Apakah yakin ingin menghapus penjahit ${name} dengan id ${id}?`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button style={{ color: "#266679" }} onClick={handleClose}>
+            Disagree
+          </Button>
+          <Button
+            style={{ color: "#266679" }}
+            onClick={() => deletePenjahitById(id)}
+            autoFocus
+          >
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
 
 const avatarThumbnail = (penjahit) => {
   if (penjahit.picture) {
@@ -210,30 +222,25 @@ export default function Penjahit() {
                         {row.price_range_max}
                       </TableCell>
                       <TableCell align="center">
-                        <Button
-                          variant="outlined"
-                          style={{
-                            borderColor: "#4abdac",
-                            color: "#4abdac",
-                            width: "90px",
-                            height: "40px",
-                          }}
-                          onClick={() => goToEditPenjahit(row.id_penjahit)}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          style={{
-                            borderColor: "#781D42",
-                            color: "#781D42",
-                            width: "90px",
-                            height: "40px",
-                          }}
-                          onClick={goToEditPenjahit}
-                        >
-                          Delete
-                        </Button>
+                        <div className="penjahit__actionButton">
+                          <Button
+                            variant="contained"
+                            style={{
+                              backgroundColor: "#266679",
+                              width: "90px",
+                              height: "40px",
+                              marginRight: "10px",
+                            }}
+                            onClick={() => goToEditPenjahit(row.id_penjahit)}
+                          >
+                            Edit
+                          </Button>
+                          <DeletePenjahitModal
+                            key={row.id_penjahit}
+                            name={row.name}
+                            id={row.id_penjahit}
+                          />
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}

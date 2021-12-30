@@ -24,3 +24,9 @@
 .penjahit__thumbnailName {
   color: black;
 }
+
+.penjahit__actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

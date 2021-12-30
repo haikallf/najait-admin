@@ -64,8 +64,8 @@ export default function AccepttModal({
               id="demo-simple-select"
               select
             >
-              <MenuItem value="AVAILABLE">Available</MenuItem>
-              <MenuItem value="NOT AVAILABLE">Not Available</MenuItem>
+              <MenuItem value="available">Available</MenuItem>
+              <MenuItem value="unavailable">Unvailable</MenuItem>
             </TealTextField>
 
             <Button

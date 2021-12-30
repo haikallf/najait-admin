@@ -66,7 +66,7 @@ export default function PenjahitModal({
 
           <div className="penjahitModal__price">
             <p>Harga Minimum: </p>
-            <p style={{ marginLeft: "22px" }}>{penjahit.price_range_max}</p>
+            <p style={{ marginLeft: "22px" }}>{penjahit.price_range_min}</p>
           </div>
 
           <div className="penjahitModal__price">
