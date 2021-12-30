@@ -13,8 +13,9 @@
 }
 
 .sidebar__options {
+  margin-top: 30px;
   padding-left: 30px;
-  height: 15vh;
+  height: 10vh;
   margin-left: 1rem;
   display: flex;
   justify-content: space-around;

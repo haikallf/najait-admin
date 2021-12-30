@@ -28,13 +28,6 @@ function Sidebar() {
           </div>
 
           <div className="sidebar__options">
-            <div className="sidebar__option">
-              <div className="sidebar__optionLogo">
-                <LaptopIcon sx={{ color: "#4abdac" }} />
-              </div>
-              <div className="sidebar__optionTitle">Dashboard</div>
-            </div>
-
             <div className="sidebar__option" onClick={goToPenjahit}>
               <div className="sidebar__optionLogo">
                 <PersonIcon sx={{ color: "#4abdac" }} />
