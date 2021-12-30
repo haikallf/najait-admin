@@ -8,12 +8,12 @@ import { url } from "../globalConfig";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export default function TambahPenjahit() {
+export default function EditPenjahit() {
   const { id } = useParams();
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState("");
   const [address, setAddress] = useState("");
   const [price_range_min, setPrice_range_min] = useState("");
   const [price_range_max, setPrice_range_max] = useState("");
@@ -56,7 +56,9 @@ export default function TambahPenjahit() {
     console.log(response.data);
     setName(response.data.name);
     setDescription(response.data.description);
-    setPicture(response.data.picture);
+    if (response.data.picture) {
+      setImageUrl(`${url}/${response.data.picture}`);
+    }
     setAddress(response.data.address);
     setPrice_range_min(response.data.price_range_min);
     setPrice_range_max(response.data?.price_range_max);
@@ -67,22 +69,22 @@ export default function TambahPenjahit() {
 
   const editPenjahitById = async (id) => {
     const token = localStorage.getItem("token");
+    const payload = new FormData();
+    if (selectedImage) {
+      payload.append("image", selectedImage);
+    }
+    payload.append("name", name);
+    payload.append("description", description);
+    payload.append("address", address);
+    payload.append("price_range_min", price_range_min);
+    payload.append("price_range_max", price_range_max);
+    payload.append("current_location", current_location);
+    payload.append("available_location", available_location);
+    payload.append("status", status);
     axios
-      .put(
-        url + `/penjahit/${id}`,
-        {
-          name: name,
-          picture: picture,
-          description: description,
-          address: address,
-          price_range_min: parseInt(price_range_min),
-          price_range_max: parseInt(price_range_max),
-          current_location: current_location,
-          available_location: available_location,
-          status: status,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      .put(url + `/penjahit/${id}`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(function (response) {
         history.push("/penjahit");
         return response;
@@ -117,12 +119,14 @@ export default function TambahPenjahit() {
               {imageUrl || selectedImage ? (
                 <Box>
                   <img
+                    id="editPenjahit__image"
                     src={imageUrl}
-                    alt={selectedImage.name}
+                    alt={imageUrl}
                     style={{
                       height: "200px",
                       width: "200px",
                       borderRadius: "50%",
+                      objectFit: "cover",
                     }}
                   />
                 </Box>

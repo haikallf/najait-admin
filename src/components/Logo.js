@@ -20,7 +20,7 @@ const Logo = ({ color, textColor }) => {
     <div className={classes["logo-container"]}>
       <img src={imgUrl} alt="logo" className={classes.logo} />
       <Typography
-        sx={{ color: textColor, fontFamily: '"Montserrat", sans-serif' }}
+        sx={{ color: textColor, fontFamily: `"Playfair Display", serif` }}
         variant="h5"
         fontWeight="bold"
       >
