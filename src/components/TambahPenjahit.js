@@ -24,12 +24,9 @@ export default function TambahPenjahit() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
   const [address, setAddress] = useState("");
   const [price_range_min, setPrice_range_min] = useState("");
   const [price_range_max, setPrice_range_max] = useState("");
-  const [current_location, setCurrent_location] = useState("");
-  const [available_location, setAvailable_location] = useState("");
   const [status, setStatus] = useState("available");
 
   const addPenjahit = () => {
@@ -48,13 +45,10 @@ export default function TambahPenjahit() {
           url + `/penjahit`,
           {
             name: name,
-            picture: picture,
             description: description,
             address: address,
             price_range_min: parseInt(price_range_min),
             price_range_max: parseInt(price_range_max),
-            current_location: current_location,
-            available_location: available_location,
             status: status,
           },
           { headers: { Authorization: `Bearer ${token}` } }
