@@ -25,7 +25,6 @@ export default function TambahPenjahit() {
   const [status, setStatus] = useState("available");
 
   const addPenjahit = () => {
-    console.log(description);
     if (
       name == "" ||
       description == "" ||

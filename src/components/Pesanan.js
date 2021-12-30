@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Penjahit.css";
+import "./Pesanan.css";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,12 +8,124 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  MenuItem,
+} from "@mui/material";
 import axios from "axios";
 import { url } from "../globalConfig";
 import AccepttModal from "./AcceptModal";
 // import { pesanan as rows } from "../globalConfig";
 import { useHistory } from "react-router-dom";
+import TealTextField from "./TealTextField";
+
+const AcceptOrderModal = ({ id_order }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [rows, setRows] = useState([]);
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    getPenjahit();
+  }, [rows]);
+
+  const getPenjahit = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(url + "/penjahit", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setRows(response.data);
+  };
+
+  const acceptOrderById = (id_order, id_penjahit) => {
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        url + `/order/accept`,
+        {
+          id_order: id_order,
+          id_penjahit: id_penjahit,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .catch((err) => console.log(err));
+    handleClose();
+    window.location.reload();
+  };
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        style={{
+          borderColor: "#266679",
+          color: "#266679",
+          width: "90px",
+          height: "40px",
+        }}
+        onClick={handleClickOpen}
+      >
+        Accept
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Pilih Penjahit"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <TealTextField
+              sx={{ width: "200px", marginTop: "10px" }}
+              id="name"
+              name="name"
+              label="Nama Penjahit"
+              variant="outlined"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              select
+            >
+              {rows.map((row, index) => (
+                <MenuItem key={index} value={row.id_penjahit}>
+                  {row.name}
+                </MenuItem>
+              ))}
+            </TealTextField>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button style={{ color: "#266679" }} onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button
+            style={{ color: "#266679" }}
+            onClick={() => acceptOrderById(id_order, name)}
+            autoFocus
+          >
+            Pilih
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
 
 export default function Pesanan() {
   const history = useHistory();
@@ -36,24 +148,42 @@ export default function Pesanan() {
 
   useEffect(() => {
     getOrder();
-  }, [rows]);
+  }, []);
 
   const getOrder = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(url + "/order", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    setRows(response.data);
     console.log(response.data);
+    setRows(response.data);
   };
 
   const getNamaPenjahitById = (id) => {
     const token = localStorage.getItem("token");
-    const response = axios.get(url + `/penjahit/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    response.then((res) => setCurrentName(res.data.name));
-    return currentName;
+    axios
+      .get(url + `/penjahit/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => console.log(res.data.name))
+      .catch((err) => console.log(err));
+  };
+
+  const completeOrderById = (id_order, id_penjahit) => {
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        url + `/order/finish`,
+        {
+          id_order: id_order,
+          id_penjahit: id_penjahit,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => window.location.reload())
+      .catch((err) => console.log(err));
   };
 
   const handleChangePage = (event, newPage) => {
@@ -77,9 +207,9 @@ export default function Pesanan() {
         penjahit={currentPenjahit}
       />
 
-      <div className="penjahit">
-        <div className="penjahit__up">
-          <div className="penjahit__title">PESANAN</div>
+      <div className="pesanan">
+        <div className="pesanan__up">
+          <div className="pesanan__title">PESANAN</div>
         </div>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: "80vh" }}>
@@ -88,7 +218,7 @@ export default function Pesanan() {
                 <TableRow>
                   <TableCell align="center">ID Pesanan</TableCell>
                   <TableCell align="center">Nama Penjahit</TableCell>
-                  <TableCell align="center">Nama Pengguna</TableCell>
+                  <TableCell align="center">Email Pengguna</TableCell>
                   <TableCell align="center">Jenis</TableCell>
                   <TableCell align="center">Pakaian</TableCell>
                   <TableCell align="center">Catatan</TableCell>
@@ -112,54 +242,54 @@ export default function Pesanan() {
                       <TableCell align="center">{row.jenis}</TableCell>
                       <TableCell align="center">{row.pakaian}</TableCell>
                       <TableCell align="center">{row.catatan}</TableCell>
-                      <TableCell align="center">{row.waktu_pesan}</TableCell>
+                      <TableCell align="center">
+                        {new Date(row.waktu_pesan).toDateString()}
+                      </TableCell>
                       <TableCell align="center">
                         {row.inbound?.status}
                       </TableCell>
                       <TableCell align="center">
-                        <Button
-                          variant="contained"
-                          style={{
-                            backgroundColor: "#4abdac",
-                            width: "90px",
-                            height: "40px",
-                            marginRight: "10px",
-                          }}
-                          onClick={() => goToEditPesanan(row.id_order)}
-                        >
-                          Details
-                        </Button>
-                        {row.inbound.status == "pending" ? (
-                          <>
-                            <Button
-                              onClick={handleOpen}
-                              variant="outlined"
-                              style={{
-                                borderColor: "#4abdac",
-                                color: "#4abdac",
-                                width: "90px",
-                                height: "40px",
-                              }}
-                            >
-                              Accept
-                            </Button>
-                          </>
-                        ) : (
-                          <>
-                            <Button
-                              variant="outlined"
-                              style={{
-                                borderColor: "#4abdac",
-                                color: "#4abdac",
-                                width: "90px",
-                                height: "40px",
-                              }}
-                              onClick={() => goToEditPesanan(row.id_order)}
-                            >
-                              Complete
-                            </Button>
-                          </>
-                        )}
+                        <div className="pesanan__actionButton">
+                          <Button
+                            variant="contained"
+                            style={{
+                              backgroundColor: "#266679",
+                              width: "90px",
+                              height: "40px",
+                              marginRight: "10px",
+                            }}
+                            onClick={() => goToEditPesanan(row.id_order)}
+                          >
+                            Details
+                          </Button>
+                          {row.inbound.status == "pending" ? (
+                            <>
+                              <AcceptOrderModal id_order={row.id_order} />
+                            </>
+                          ) : row.inbound.status == "ongoing" ? (
+                            <>
+                              <Button
+                                variant="outlined"
+                                style={{
+                                  borderColor: "#266679",
+                                  color: "#266679",
+                                  width: "90px",
+                                  height: "40px",
+                                }}
+                                onClick={() =>
+                                  completeOrderById(
+                                    row.id_order,
+                                    row.inbound.inboundIdPenjahit
+                                  )
+                                }
+                              >
+                                Complete
+                              </Button>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
