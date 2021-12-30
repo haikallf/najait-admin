@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./EditPesanan.css";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import { Button, Grid, MenuItem, Typography } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import TealTextField from "./TealTextField";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { url } from "../globalConfig";
+import { useHistory } from "react-router-dom";
 
 export default function EditPesanan() {
-  // const TealButton = styled(Button)(() => ({
-  //   "& .MuiButton-contained": {
-  //     backgroundColor: "#266679",
-  //   },
-  // }));
+  const history = useHistory();
+  useEffect(() => {
+    checkAuthAdmin();
+  }, []);
+
+  const checkAuthAdmin = () => {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
+      history.replace("/login");
+    }
+  };
 
   const { id } = useParams();
   const [name, setName] = useState("");
@@ -57,17 +60,6 @@ export default function EditPesanan() {
     console.log(rows);
   };
 
-  // const editPesananById = () => {
-  //   const token = localStorage.getItem("token");
-  //   const response = await axios.put(url + `/order/${id}`, {
-  //     name: name,
-  //     email: email,
-  //     jenis: jenis,
-
-  //   },{
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  // }
   const handleStatus = (event) => {
     setStatus(event.target.value);
   };

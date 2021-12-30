@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./TambahPenjahit.css";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import TealTextField from "./TealTextField";
 import axios from "axios";
@@ -13,6 +11,16 @@ export default function TambahPenjahit() {
   const history = useHistory();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    checkAuthAdmin();
+  }, []);
+
+  const checkAuthAdmin = () => {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
+      history.replace("/login");
+    }
+  };
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

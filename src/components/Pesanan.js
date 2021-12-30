@@ -133,8 +133,15 @@ export default function Pesanan() {
   const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const [currentName, setCurrentName] = useState("");
+  useEffect(() => {
+    checkAuthAdmin();
+  }, []);
 
+  const checkAuthAdmin = () => {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
+      history.replace("/login");
+    }
+  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);

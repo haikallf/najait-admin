@@ -105,7 +105,7 @@ export default function Penjahit() {
   }, []);
 
   const checkAuthAdmin = () => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
       history.replace("/login");
     }
   };

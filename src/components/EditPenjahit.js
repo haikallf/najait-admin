@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TealTextField from "./TealTextField";
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { penjahit as rows, url } from "../globalConfig";
+import { url } from "../globalConfig";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -23,6 +23,16 @@ export default function TambahPenjahit() {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    checkAuthAdmin();
+  }, []);
+
+  const checkAuthAdmin = () => {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
+      history.replace("/login");
+    }
+  };
 
   const handleStatus = (event) => {
     setStatus(event.target.value);
