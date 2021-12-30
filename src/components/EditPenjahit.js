@@ -50,8 +50,8 @@ export default function TambahPenjahit() {
     setAddress(response.data.address);
     setPrice_range_min(response.data.price_range_min);
     setPrice_range_max(response.data?.price_range_max);
-    setCurrent_location(response.data?.current_location);
-    setAvailable_location(response.data?.available_location);
+    setCurrent_location(response.data?.statuspenjahit.current_location);
+    setAvailable_location(response.data?.statuspenjahit.available_location);
     setStatus(response.data?.statuspenjahit.status);
   };
 

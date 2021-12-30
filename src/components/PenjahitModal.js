@@ -73,6 +73,31 @@ export default function PenjahitModal({
             <p>Harga Maksimum: </p>
             <p style={{ marginLeft: "10px" }}>{penjahit.price_range_max}</p>
           </div>
+
+          {/* <div className="penjahitModal__location">
+            <p>Lokasi Saat Ini: </p>
+            <p style={{ marginLeft: "40px" }}>
+              {penjahit.statuspenjahit?.current_location
+                ? penjahit.statuspenjahit.current_location
+                : "-"}
+            </p>
+          </div>
+
+          <div className="penjahitModal__location">
+            <p>Lokasi Tersedia: </p>
+            <p style={{ marginLeft: "33px" }}>
+              {penjahit.statuspenjahit.available_location
+                ? penjahit.statuspenjahit.available_location
+                : "-"}
+            </p>
+          </div>
+
+          <div className="penjahitModal__location">
+            <p>Status: </p>
+            <p style={{ marginLeft: "103px" }}>
+              {penjahit.statuspenjahit.status}
+            </p>
+          </div> */}
         </Box>
       </Modal>
     </div>
