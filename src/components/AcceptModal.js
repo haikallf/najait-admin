@@ -1,11 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Avatar, MenuItem, TextField } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import "./AcceptModal.css";
-import { styled } from "@mui/material/styles";
+import TealTextField from "./TealTextField";
 
 const style = {
   position: "absolute",
@@ -27,26 +26,6 @@ export default function AccepttModal({
   handleClose,
   penjahit,
 }) {
-  const TealTextField = styled(TextField)({
-    "& label.Mui-focused": {
-      color: "#266679",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#266679",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#266679",
-      },
-      "&:hover fieldset": {
-        borderColor: "#266679",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#266679",
-      },
-    },
-  });
-
   return (
     <div>
       <Modal

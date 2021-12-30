@@ -16,12 +16,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Modal,
-  Typography,
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { truncate, url } from "../globalConfig";
-import { Box } from "@mui/system";
 import PenjahitModal from "./PenjahitModal";
 import axios from "axios";
 

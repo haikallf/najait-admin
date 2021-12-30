@@ -90,12 +90,6 @@ export default function TambahPenjahit() {
       .catch((err) => console.log(err));
   };
 
-  // const TealButton = styled(Button)(() => ({
-  //   "& .MuiButton-contained": {
-  //     backgroundColor: "#266679",
-  //   },
-  // }));
-
   return (
     <div className="editPenjahit">
       <div className="editPenjahit__top">

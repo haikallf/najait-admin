@@ -22,7 +22,6 @@ function Sidebar() {
     <>
       {location.pathname != "/login" ? (
         <div className="sidebar">
-          {/* <div className="sidebar__logo">Najait</div> */}
           <div className="sidebar__logo">
             <Logo color="black" textColor="#266679" />
           </div>

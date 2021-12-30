@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useLocation, useHistory } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import axios from "axios";
 import Logo from "./Logo";
 import TealTextField from "./TealTextField";
 import { url } from "../globalConfig";
 
 function Login() {
-  const location = useLocation();
   const history = useHistory();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);

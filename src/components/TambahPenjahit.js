@@ -73,12 +73,6 @@ export default function TambahPenjahit() {
     }
   }, [selectedImage]);
 
-  // const TealButton = styled(Button)(() => ({
-  //   "& .MuiButton-contained": {
-  //     backgroundColor: "#266679",
-  //   },
-  // }));
-
   const handleStatus = (event) => {
     setStatus(event.target.value);
   };
