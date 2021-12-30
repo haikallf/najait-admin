@@ -87,7 +87,7 @@ const DeletePenjahitModal = ({ name, id }) => {
 
 const avatarThumbnail = (penjahit) => {
   if (penjahit.picture) {
-    return <Avatar alt={penjahit.name} src={penjahit.picture} />;
+    return <Avatar alt={penjahit.name} src={url + "/" + penjahit.picture} />;
   } else {
     return <Avatar>{penjahit?.name?.substring(0, 1)}</Avatar>;
   }
