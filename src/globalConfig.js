@@ -134,7 +134,7 @@ exports.pesanan = [
 //   input.length > 5 ? `${input.substring(0, 5)}...` : input;
 
 exports.truncate = (input, count) => {
-  if (input.length > 5) {
+  if (input.length > count) {
     return input.substring(0, count) + "...";
   }
   return input;

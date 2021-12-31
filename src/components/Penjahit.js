@@ -70,14 +70,14 @@ const DeletePenjahitModal = ({ name, id }) => {
         </DialogContent>
         <DialogActions>
           <Button style={{ color: "#266679" }} onClick={handleClose}>
-            Disagree
+            Batal
           </Button>
           <Button
             style={{ color: "#266679" }}
             onClick={() => deletePenjahitById(id)}
             autoFocus
           >
-            Agree
+            Hapus
           </Button>
         </DialogActions>
       </Dialog>
@@ -184,6 +184,7 @@ export default function Penjahit() {
                   <TableCell align="center">Alamat</TableCell>
                   <TableCell align="center">Harga Minimum</TableCell>
                   <TableCell align="center">Harga Maksimum</TableCell>
+                  <TableCell align="center">Status</TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
@@ -217,6 +218,9 @@ export default function Penjahit() {
                       </TableCell>
                       <TableCell align="center">
                         {row.price_range_max}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.statuspenjahit.status}
                       </TableCell>
                       <TableCell align="center">
                         <div className="penjahit__actionButton">

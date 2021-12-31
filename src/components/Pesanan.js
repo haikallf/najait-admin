@@ -44,7 +44,7 @@ const AcceptOrderModal = ({ id_order }) => {
 
   const getPenjahit = async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.get(url + "/penjahit", {
+    const response = await axios.get(url + "/penjahit/available", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRows(response.data);
@@ -224,7 +224,7 @@ export default function Pesanan() {
               <TableHead>
                 <TableRow>
                   <TableCell align="center">ID Pesanan</TableCell>
-                  <TableCell align="center">Nama Penjahit</TableCell>
+                  <TableCell align="center">ID Penjahit</TableCell>
                   <TableCell align="center">Email Pengguna</TableCell>
                   <TableCell align="center">Jenis</TableCell>
                   <TableCell align="center">Pakaian</TableCell>
@@ -242,8 +242,8 @@ export default function Pesanan() {
                       <TableCell align="center">{row.id_order}</TableCell>
                       <TableCell align="center">
                         {row.inbound.inboundIdPenjahit
-                          ? getNamaPenjahitById(row.inbound.inboundIdPenjahit)
-                          : "Kosong"}
+                          ? row.inbound.inboundIdPenjahit
+                          : "-"}
                       </TableCell>
                       <TableCell align="center">{row.User.email}</TableCell>
                       <TableCell align="center">{row.jenis}</TableCell>
