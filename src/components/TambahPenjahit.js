@@ -14,7 +14,7 @@ export default function TambahPenjahit() {
 
   useEffect(() => {
     checkAuthAdmin();
-  }, []);
+  }, [name]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {

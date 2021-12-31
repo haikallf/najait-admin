@@ -11,7 +11,7 @@ export default function EditPesanan() {
   const history = useHistory();
   useEffect(() => {
     checkAuthAdmin();
-  }, []);
+  }, [rows]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {

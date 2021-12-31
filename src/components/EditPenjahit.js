@@ -26,7 +26,7 @@ export default function EditPenjahit() {
 
   useEffect(() => {
     checkAuthAdmin();
-  }, []);
+  }, [name]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {

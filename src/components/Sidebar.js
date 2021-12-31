@@ -2,6 +2,7 @@ import React from "react";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory } from "react-router-dom";
 import "./Sidebar.css";
 import Logo from "./Logo";
@@ -16,6 +17,11 @@ function Sidebar() {
 
   const goToPesanan = () => {
     history.push("/pesanan");
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    history.replace("/login");
   };
 
   return (
@@ -39,6 +45,13 @@ function Sidebar() {
                 <ShoppingCartIcon sx={{ color: "#4abdac" }} />
               </div>
               <div className="sidebar__optionTitle">Pesanan</div>
+            </div>
+
+            <div className="sidebar__option" onClick={handleLogout}>
+              <div className="sidebar__optionLogo">
+                <LogoutIcon sx={{ color: "#4abdac" }} />
+              </div>
+              <div className="sidebar__optionTitle">Logout</div>
             </div>
           </div>
         </div>
