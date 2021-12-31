@@ -132,10 +132,15 @@ export default function Pesanan() {
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [thread, setThread] = useState(0);
+
+  useEffect(() => {
+    setThread(thread + 1);
+  }, [thread]);
 
   useEffect(() => {
     checkAuthAdmin();
-  }, [rows]);
+  }, [thread]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
@@ -150,7 +155,7 @@ export default function Pesanan() {
   const [currentPenjahit, setCurrentPenjahit] = useState({});
 
   const goToEditPesanan = (id) => {
-    history.push(`/editpesanan/${id}`);
+    history.replace(`/editpesanan/${id}`);
   };
 
   useEffect(() => {

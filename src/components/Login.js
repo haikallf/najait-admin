@@ -24,7 +24,7 @@ function Login() {
         .then(function (response) {
           console.log(response);
           localStorage.setItem("token", response.data.accessToken);
-          history.push("/");
+          history.replace("/");
           return response;
         })
         .catch((err) => console.log(err));
@@ -35,7 +35,7 @@ function Login() {
     <>
       <div className="login">
         <div className="login__formContainer">
-          <div className="login__logo" onClick={() => history.push("/")}>
+          <div className="login__logo" onClick={() => history.replace("/")}>
             <Logo color="black" textColor="#266679" />
           </div>
           <div className="login__form">

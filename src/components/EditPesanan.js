@@ -9,9 +9,15 @@ import { useHistory } from "react-router-dom";
 
 export default function EditPesanan() {
   const history = useHistory();
+  const [thread, setThread] = useState(0);
+
+  useEffect(() => {
+    setThread(thread + 1);
+  }, [thread]);
+
   useEffect(() => {
     checkAuthAdmin();
-  }, [rows]);
+  }, [thread]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {

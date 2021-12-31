@@ -11,11 +11,15 @@ export default function TambahPenjahit() {
   const history = useHistory();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [thread, setThread] = useState(0);
+
+  useEffect(() => {
+    setThread(thread + 1);
+  }, [thread]);
 
   useEffect(() => {
     checkAuthAdmin();
-  }, [name]);
-
+  }, [thread]);
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
       history.replace("/login");
@@ -54,7 +58,7 @@ export default function TambahPenjahit() {
           { headers: { Authorization: `Bearer ${token}` } }
         )
         .then(function (response) {
-          history.push("/penjahit");
+          history.replace("/penjahit");
           return response;
         })
         .catch((err) => console.log(err));

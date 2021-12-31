@@ -96,10 +96,15 @@ const avatarThumbnail = (penjahit) => {
 export default function Penjahit() {
   const history = useHistory();
   const [rows, setRows] = useState([]);
+  const [thread, setThread] = useState(0);
+
+  useEffect(() => {
+    setThread(thread + 1);
+  }, [thread]);
 
   useEffect(() => {
     checkAuthAdmin();
-  }, [rows]);
+  }, [thread]);
 
   const checkAuthAdmin = () => {
     if (!localStorage.getItem("token") || localStorage.getItem("token") == "") {
@@ -128,11 +133,11 @@ export default function Penjahit() {
   const [currentPenjahit, setCurrentPenjahit] = React.useState({});
 
   const goToTambahPenjahit = () => {
-    history.push("/tambahpenjahit");
+    history.replace("/tambahpenjahit");
   };
 
   const goToEditPenjahit = (id) => {
-    history.push(`/editpenjahit/${id}`);
+    history.replace(`/editpenjahit/${id}`);
   };
 
   const [page, setPage] = React.useState(0);

@@ -12,11 +12,11 @@ function Sidebar() {
   const history = useHistory();
   const location = useLocation();
   const goToPenjahit = () => {
-    history.push("/penjahit");
+    history.replace("/penjahit");
   };
 
   const goToPesanan = () => {
-    history.push("/pesanan");
+    history.replace("/pesanan");
   };
 
   const handleLogout = () => {
