@@ -12,7 +12,9 @@ export default function EditPesanan() {
   const [thread, setThread] = useState(0);
 
   useEffect(() => {
-    setThread(thread + 1);
+    setTimeout(() => {
+      setThread(thread + 1);
+    }, 1000);
   }, [thread]);
 
   useEffect(() => {

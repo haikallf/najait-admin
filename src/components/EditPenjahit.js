@@ -15,6 +15,8 @@ export default function EditPenjahit() {
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
   const [address, setAddress] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
+  const [kota, setKota] = useState("");
   const [price_range_min, setPrice_range_min] = useState("");
   const [price_range_max, setPrice_range_max] = useState("");
   const [current_location, setCurrent_location] = useState("");
@@ -26,7 +28,9 @@ export default function EditPenjahit() {
   const [thread, setThread] = useState(0);
 
   useEffect(() => {
-    setThread(thread + 1);
+    setTimeout(() => {
+      setThread(thread + 1);
+    }, 1000);
   }, [thread]);
 
   useEffect(() => {
@@ -65,6 +69,8 @@ export default function EditPenjahit() {
       setImageUrl(`${url}/${response.data.picture}`);
     }
     setAddress(response.data.address);
+    setKecamatan(response.data.kecamatan);
+    setKota(response.data.kota);
     setPrice_range_min(response.data.price_range_min);
     setPrice_range_max(response.data?.price_range_max);
     setCurrent_location(response.data?.statuspenjahit.current_location);
@@ -81,6 +87,8 @@ export default function EditPenjahit() {
     payload.append("name", name);
     payload.append("description", description);
     payload.append("address", address);
+    payload.append("kecamatan", kecamatan);
+    payload.append("kota", kota);
     payload.append("price_range_min", price_range_min);
     payload.append("price_range_max", price_range_max);
     payload.append("current_location", current_location);
@@ -221,8 +229,7 @@ export default function EditPenjahit() {
             }}
           />
         </div>
-        <div className="editPenjahit__contactInfo">
-          <p>Informasi Kontak</p>
+        <div className="editPenjahit__address">
           <TealTextField
             sx={{ width: "100%" }}
             id="address"
@@ -232,6 +239,30 @@ export default function EditPenjahit() {
             value={address}
             onChange={(e) => {
               setAddress(e.target.value);
+            }}
+          />
+        </div>
+        <div className="editPenjahit__location">
+          <TealTextField
+            sx={{ flex: 0.49 }}
+            id="kecamatan"
+            name="kecamatan"
+            label="Kecamatan"
+            variant="outlined"
+            value={kecamatan}
+            onChange={(e) => {
+              setKecamatan(e.target.value);
+            }}
+          />
+          <TealTextField
+            sx={{ flex: 0.49 }}
+            id="kota"
+            name="kota"
+            label="Kabupaten / Kota"
+            variant="outlined"
+            value={kota}
+            onChange={(e) => {
+              setKota(e.target.value);
             }}
           />
         </div>

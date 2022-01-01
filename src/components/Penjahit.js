@@ -99,7 +99,9 @@ export default function Penjahit() {
   const [thread, setThread] = useState(0);
 
   useEffect(() => {
-    setThread(thread + 1);
+    setTimeout(() => {
+      setThread(thread + 1);
+    }, 1000);
   }, [thread]);
 
   useEffect(() => {
@@ -187,6 +189,8 @@ export default function Penjahit() {
                   <TableCell align="center">Nama Penjahit</TableCell>
                   <TableCell align="center">Deskripsi</TableCell>
                   <TableCell align="center">Alamat</TableCell>
+                  <TableCell align="center">Kecamatan</TableCell>
+                  <TableCell align="center">Kabupaten / Kota</TableCell>
                   <TableCell align="center">Harga Minimum</TableCell>
                   <TableCell align="center">Harga Maksimum</TableCell>
                   <TableCell align="center">Status</TableCell>
@@ -217,6 +221,12 @@ export default function Penjahit() {
                       </TableCell>
                       <TableCell align="center">
                         {truncate(row.address, 20)}
+                      </TableCell>
+                      <TableCell align="center">
+                        {truncate(row.kecamatan, 20)}
+                      </TableCell>
+                      <TableCell align="center">
+                        {truncate(row.kota, 20)}
                       </TableCell>
                       <TableCell align="center">
                         {row.price_range_min}

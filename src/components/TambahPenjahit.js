@@ -14,7 +14,9 @@ export default function TambahPenjahit() {
   const [thread, setThread] = useState(0);
 
   useEffect(() => {
-    setThread(thread + 1);
+    setTimeout(() => {
+      setThread(thread + 1);
+    }, 1000);
   }, [thread]);
 
   useEffect(() => {
@@ -29,6 +31,8 @@ export default function TambahPenjahit() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
+  const [kota, setKota] = useState("");
   const [price_range_min, setPrice_range_min] = useState("");
   const [price_range_max, setPrice_range_max] = useState("");
   const [status, setStatus] = useState("available");
@@ -39,7 +43,9 @@ export default function TambahPenjahit() {
       description == "" ||
       address == "" ||
       price_range_min == "" ||
-      price_range_max == ""
+      price_range_max == "" ||
+      kecamatan == "" ||
+      kota == ""
     ) {
       alert("Tidak boleh ada field yang kosong!");
     } else {
@@ -51,6 +57,8 @@ export default function TambahPenjahit() {
             name: name,
             description: description,
             address: address,
+            kecamatan: kecamatan,
+            kota: kota,
             price_range_min: parseInt(price_range_min),
             price_range_max: parseInt(price_range_max),
             status: status,
@@ -122,8 +130,7 @@ export default function TambahPenjahit() {
             }}
           />
         </div>
-        <div className="tambahPenjahit__contactInfo">
-          <p>Informasi Kontak</p>
+        <div className="tambahPenjahit__address">
           <TealTextField
             sx={{ width: "100%" }}
             id="address"
@@ -133,6 +140,30 @@ export default function TambahPenjahit() {
             value={address}
             onChange={(e) => {
               setAddress(e.target.value);
+            }}
+          />
+        </div>
+        <div className="tambahPenjahit__location">
+          <TealTextField
+            sx={{ flex: 0.49 }}
+            id="kecamatan"
+            name="kecamatan"
+            label="Kecamatan"
+            variant="outlined"
+            value={kecamatan}
+            onChange={(e) => {
+              setKecamatan(e.target.value);
+            }}
+          />
+          <TealTextField
+            sx={{ flex: 0.49 }}
+            id="kota"
+            name="kota"
+            label="Kabupaten / Kota"
+            variant="outlined"
+            value={kota}
+            onChange={(e) => {
+              setKota(e.target.value);
             }}
           />
         </div>
