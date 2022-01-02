@@ -30,6 +30,7 @@ export default function EditPesanan() {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [jenis, setJenis] = useState("");
   const [pakaian, setPakaian] = useState("");
   const [catatan, setCatatan] = useState("");
@@ -52,6 +53,13 @@ export default function EditPesanan() {
     setCatatan(response.data.catatan);
     setWaktu_pesan(response.data.waktu_pesan);
     setStatus(response.data.inbound?.status);
+    const response2 = await axios.get(
+      url + `/user/profile/${response.data.User.id_user}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    setPhone(response2.data.phone);
   };
 
   const [rows, setRows] = useState([]);
@@ -65,7 +73,6 @@ export default function EditPesanan() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRows(response.data);
-    console.log(rows);
   };
 
   const handleStatus = (event) => {
@@ -134,9 +141,9 @@ export default function EditPesanan() {
               ))}
             </TealTextField>
           </div>
-          <div className="editPesanan__single">
+          <div className="editPesanan__double">
             <TealTextField
-              fullWidth
+              sx={{ flex: 0.49 }}
               id="email"
               name="email"
               label="Email Pengguna"
@@ -144,6 +151,20 @@ export default function EditPesanan() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
+              }}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TealTextField
+              sx={{ flex: 0.49 }}
+              id="phone"
+              name="phone"
+              label="Nomor Ponsel"
+              variant="standard"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
               }}
               InputProps={{
                 readOnly: true,
@@ -205,7 +226,7 @@ export default function EditPesanan() {
               name="waktu_pesan"
               label="Waktu Pesan"
               variant="standard"
-              value={waktu_pesan}
+              value={new Date(waktu_pesan).toString()}
               onChange={(e) => {
                 setWaktu_pesan(e.target.value);
               }}

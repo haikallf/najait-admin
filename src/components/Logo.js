@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 const Logo = ({ color, textColor }) => {
   const classes = useStyles();
-  const imgUrl = "./assets/images/logo-" + color + ".png";
+  const imgUrl = "../assets/images/logo-" + color + ".png";
   return (
     <div className={classes["logo-container"]}>
       <img src={imgUrl} alt="logo" className={classes.logo} />
