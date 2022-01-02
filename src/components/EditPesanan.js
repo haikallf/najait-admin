@@ -34,6 +34,7 @@ export default function EditPesanan() {
   const [jenis, setJenis] = useState("");
   const [pakaian, setPakaian] = useState("");
   const [catatan, setCatatan] = useState("");
+  const [payment, setPayment] = useState("");
   const [waktu_pesan, setWaktu_pesan] = useState("");
   const [status, setStatus] = useState("");
 
@@ -51,6 +52,7 @@ export default function EditPesanan() {
     setJenis(response.data.jenis);
     setPakaian(response.data.pakaian);
     setCatatan(response.data.catatan);
+    setPayment(response.data.payment);
     setWaktu_pesan(response.data.waktu_pesan);
     setStatus(response.data.inbound?.status);
     const response2 = await axios.get(
@@ -118,9 +120,9 @@ export default function EditPesanan() {
               <MenuItem value="completed">Completed</MenuItem>
             </TealTextField>
           </div>
-          <div className="editPesanan__single">
+          <div className="editPesanan__double">
             <TealTextField
-              fullWidth
+              sx={{ flex: 0.69 }}
               id="name"
               name="name"
               label="Nama Penjahit"
@@ -140,6 +142,20 @@ export default function EditPesanan() {
                 </MenuItem>
               ))}
             </TealTextField>
+            <TealTextField
+              sx={{ flex: 0.29 }}
+              id="payment"
+              name="payment"
+              label="Metode Pembayaran"
+              variant="standard"
+              value={payment}
+              onChange={(e) => {
+                setPayment(e.target.value);
+              }}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
           </div>
           <div className="editPesanan__double">
             <TealTextField

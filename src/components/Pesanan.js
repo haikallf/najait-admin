@@ -236,6 +236,7 @@ export default function Pesanan() {
                   <TableCell align="center">Jenis</TableCell>
                   <TableCell align="center">Pakaian</TableCell>
                   <TableCell align="center">Catatan</TableCell>
+                  <TableCell align="center">Pembayaran</TableCell>
                   <TableCell align="center">Waktu Pesan</TableCell>
                   <TableCell align="center">Status</TableCell>
                   <TableCell align="center">Action</TableCell>
@@ -256,6 +257,7 @@ export default function Pesanan() {
                       <TableCell align="center">{row.jenis}</TableCell>
                       <TableCell align="center">{row.pakaian}</TableCell>
                       <TableCell align="center">{row.catatan}</TableCell>
+                      <TableCell align="center">{row.payment}</TableCell>
                       <TableCell align="center">
                         {new Date(row.waktu_pesan).toDateString()}
                       </TableCell>
