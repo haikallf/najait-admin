@@ -6,6 +6,7 @@ import TealTextField from "./TealTextField";
 import axios from "axios";
 import { url } from "../globalConfig";
 import { useHistory } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 export default function TambahPenjahit() {
   const history = useHistory();
@@ -36,8 +37,10 @@ export default function TambahPenjahit() {
   const [price_range_min, setPrice_range_min] = useState("");
   const [price_range_max, setPrice_range_max] = useState("");
   const [status, setStatus] = useState("available");
+  const [loading, setLoading] = useState(false);
 
   const addPenjahit = () => {
+    setLoading(true);
     if (
       name == "" ||
       description == "" ||
@@ -47,6 +50,7 @@ export default function TambahPenjahit() {
       kecamatan == "" ||
       kota == ""
     ) {
+      setLoading(false);
       alert("Tidak boleh ada field yang kosong!");
     } else {
       const token = localStorage.getItem("token");
@@ -67,9 +71,13 @@ export default function TambahPenjahit() {
         )
         .then(function (response) {
           history.replace("/penjahit");
+          setLoading(false);
           return response;
         })
-        .catch((err) => console.log(err));
+        .catch(function (err) {
+          setLoading(false);
+          console.log(err);
+        });
     }
   };
 
@@ -194,7 +202,8 @@ export default function TambahPenjahit() {
           />
         </div>
         <div className="tambahPenjahit__submitButton">
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             sx={{
               backgroundColor: "#266679",
@@ -204,7 +213,7 @@ export default function TambahPenjahit() {
             onClick={addPenjahit}
           >
             Tambah Penjahit
-          </Button>
+          </LoadingButton>
         </div>
       </div>
     </div>

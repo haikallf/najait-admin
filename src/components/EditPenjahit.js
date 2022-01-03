@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { url } from "../globalConfig";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 export default function EditPenjahit() {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function EditPenjahit() {
   const [current_location, setCurrent_location] = useState("");
   const [available_location, setAvailable_location] = useState("");
   const [status, setStatus] = useState("available");
+  const [loading, setLoading] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -79,6 +81,7 @@ export default function EditPenjahit() {
   };
 
   const editPenjahitById = async (id) => {
+    setLoading(true);
     const token = localStorage.getItem("token");
     const payload = new FormData();
     if (selectedImage) {
@@ -99,10 +102,14 @@ export default function EditPenjahit() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
+        setLoading(false);
         history.replace("/penjahit");
         return response;
       })
-      .catch((err) => console.log(err));
+      .catch(function (err) {
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   return (
@@ -315,7 +322,8 @@ export default function EditPenjahit() {
           />
         </div>
         <div className="editPenjahit__submitButton">
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             sx={{
               backgroundColor: "#266679",
@@ -324,7 +332,7 @@ export default function EditPenjahit() {
             onClick={() => editPenjahitById(id)}
           >
             Edit Penjahit
-          </Button>
+          </LoadingButton>
         </div>
       </div>
     </div>

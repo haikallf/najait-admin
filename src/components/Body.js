@@ -34,7 +34,7 @@ function Body() {
         <Route path="/pesanan" component={Pesanan} />
         <Route path="/tambahpenjahit" component={TambahPenjahit} />
         <Route path="/editpenjahit/:id" component={EditPenjahit} />
-        <Redirect to="penjahit" />
+        <Redirect to="login" />
       </Switch>
     </div>
   );

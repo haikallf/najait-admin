@@ -30,7 +30,7 @@ function Login() {
           })
           .then(function (response) {
             localStorage.setItem("token", response.data.accessToken);
-            history.replace("/");
+            history.replace("/penjahit");
             setLoading(false);
             return response;
           })
