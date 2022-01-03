@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useLocation, useHistory } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Alert, Box, Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import Logo from "./Logo";
 import TealTextField from "./TealTextField";
@@ -11,24 +12,37 @@ function Login() {
   const history = useHistory();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleLogin = () => {
-    if (email == null || email == "" || password == null || password == "") {
-      alert("Tidak boleh ada field yang kosong!");
-    } else {
-      axios
-        .post(url + `/admin/login`, {
-          email: email,
-          password: password,
-        })
-        .then(function (response) {
-          console.log(response);
-          localStorage.setItem("token", response.data.accessToken);
-          history.replace("/");
-          return response;
-        })
-        .catch((err) => console.log(err));
-    }
+    setLoading(true);
+    setTimeout(() => {
+      if (email == null || email == "" || password == null || password == "") {
+        alert("Tidak boleh ada field yang kosong!");
+        setLoading(false);
+      } else {
+        setLoading(true);
+        axios
+          .post(url + `/admin/login`, {
+            email: email,
+            password: password,
+          })
+          .then(function (response) {
+            localStorage.setItem("token", response.data.accessToken);
+            history.replace("/");
+            setLoading(false);
+            return response;
+          })
+          .catch(function (err) {
+            setError({
+              err: err,
+              msg: "Wrong email and password combination!",
+            });
+            setLoading(false);
+          });
+      }
+    }, 500);
   };
 
   return (
@@ -38,6 +52,11 @@ function Login() {
           <div className="login__logo" onClick={() => history.replace("/")}>
             <Logo color="black" textColor="#266679" />
           </div>
+          {error ? (
+            <Box my={2}>
+              <Alert severity="error">{error.msg}</Alert>
+            </Box>
+          ) : null}
           <div className="login__form">
             <TealTextField
               fullWidth
@@ -71,7 +90,8 @@ function Login() {
             />
 
             <div className="login__submitBtn">
-              <Button
+              <LoadingButton
+                loading={loading}
                 variant="contained"
                 sx={{
                   backgroundColor: "#266679",
@@ -81,7 +101,7 @@ function Login() {
                 onClick={handleLogin}
               >
                 Login
-              </Button>
+              </LoadingButton>
             </div>
           </div>
         </div>

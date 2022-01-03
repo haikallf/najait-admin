@@ -122,7 +122,7 @@ export default function EditPesanan() {
           </div>
           <div className="editPesanan__double">
             <TealTextField
-              sx={{ flex: 0.69 }}
+              sx={{ flex: 0.49 }}
               id="name"
               name="name"
               label="Nama Penjahit"
@@ -143,7 +143,7 @@ export default function EditPesanan() {
               ))}
             </TealTextField>
             <TealTextField
-              sx={{ flex: 0.29 }}
+              sx={{ flex: 0.49 }}
               id="payment"
               name="payment"
               label="Metode Pembayaran"
