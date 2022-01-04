@@ -39,7 +39,7 @@ const DeletePenjahitModal = ({ name, id }) => {
       .delete(url + `/penjahit/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
     handleClose();
   };
   return (
@@ -124,7 +124,6 @@ export default function Penjahit() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRows(response.data);
-    console.log(rows);
   };
   const [open, setOpen] = React.useState(false);
   const handleOpen = (index) => {

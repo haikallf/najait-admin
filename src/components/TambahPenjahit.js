@@ -76,7 +76,6 @@ export default function TambahPenjahit() {
         })
         .catch(function (err) {
           setLoading(false);
-          console.log(err);
         });
     }
   };

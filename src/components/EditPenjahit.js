@@ -64,7 +64,6 @@ export default function EditPenjahit() {
     const response = await axios.get(url + `/penjahit/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
     setName(response.data.name);
     setDescription(response.data.description);
     if (response.data.picture) {
@@ -108,7 +107,6 @@ export default function EditPenjahit() {
       })
       .catch(function (err) {
         setLoading(false);
-        console.log(err);
       });
   };
 

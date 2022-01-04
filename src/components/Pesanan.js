@@ -63,7 +63,7 @@ const AcceptOrderModal = ({ id_order }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .catch((err) => console.log(err));
+      .catch((err) => err);
     handleClose();
     window.location.reload();
   };
@@ -169,7 +169,6 @@ export default function Pesanan() {
     const response = await axios.get(url + "/order", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
     setRows(response.data);
   };
 
@@ -179,8 +178,8 @@ export default function Pesanan() {
       .get(url + `/penjahit/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => console.log(res.data.name))
-      .catch((err) => console.log(err));
+      .then((res) => res.data.name)
+      .catch((err) => err);
   };
 
   const completeOrderById = (id_order, id_penjahit) => {
@@ -197,7 +196,7 @@ export default function Pesanan() {
         }
       )
       .then((res) => window.location.reload())
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
 
   const handleChangePage = (event, newPage) => {
