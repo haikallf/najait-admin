@@ -1,4 +1,4 @@
-exports.url = "http://localhost:4000";
+exports.url = "http://najait-backend.herokuapp.com";
 
 exports.penjahit = [
   {
