@@ -1,4 +1,4 @@
-exports.url = "http://najait-backend.herokuapp.com";
+exports.url = "https://najait-backend.herokuapp.com";
 
 exports.truncate = (input, count) => {
   if (input.length > count) {
