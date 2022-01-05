@@ -7,6 +7,7 @@ import TambahPenjahit from "./TambahPenjahit";
 import EditPenjahit from "./EditPenjahit";
 import EditPesanan from "./EditPesanan";
 import Login from "./Login";
+import Feedback from "./Feedback";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -34,6 +35,7 @@ function Body() {
         <Route path="/pesanan" component={Pesanan} />
         <Route path="/tambahpenjahit" component={TambahPenjahit} />
         <Route path="/editpenjahit/:id" component={EditPenjahit} />
+        <Route path="/feedback" component={Feedback} />
         <Redirect to="login" />
       </Switch>
     </div>

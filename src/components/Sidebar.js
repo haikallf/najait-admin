@@ -1,5 +1,5 @@
 import React from "react";
-import LaptopIcon from "@mui/icons-material/Laptop";
+import FeedbackIcon from "@mui/icons-material/Feedback";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -17,6 +17,10 @@ function Sidebar() {
 
   const goToPesanan = () => {
     history.replace("/pesanan");
+  };
+
+  const goToFeedback = () => {
+    history.replace("/feedback");
   };
 
   const handleLogout = () => {
@@ -45,6 +49,13 @@ function Sidebar() {
                 <ShoppingCartIcon sx={{ color: "#4abdac" }} />
               </div>
               <div className="sidebar__optionTitle">Pesanan</div>
+            </div>
+
+            <div className="sidebar__option" onClick={goToFeedback}>
+              <div className="sidebar__optionLogo">
+                <FeedbackIcon sx={{ color: "#4abdac" }} />
+              </div>
+              <div className="sidebar__optionTitle">Feedback</div>
             </div>
 
             <div className="sidebar__option" onClick={handleLogout}>
