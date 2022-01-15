@@ -34,6 +34,7 @@ export default function EditPesanan() {
   const [jenis, setJenis] = useState("");
   const [pakaian, setPakaian] = useState("");
   const [catatan, setCatatan] = useState("");
+  const [alamat, setAlamat] = useState("");
   const [payment, setPayment] = useState("");
   const [waktu_pesan, setWaktu_pesan] = useState("");
   const [status, setStatus] = useState("");
@@ -61,7 +62,9 @@ export default function EditPesanan() {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log(response2.data);
     setPhone(response2.data.phone);
+    setAlamat(response2.data.address);
   };
 
   const [rows, setRows] = useState([]);
@@ -221,7 +224,7 @@ export default function EditPesanan() {
             <TealTextField
               fullWidth
               multiline
-              rows={9}
+              rows={5}
               id="catatan"
               name="catatan"
               label="Catatan"
@@ -235,6 +238,26 @@ export default function EditPesanan() {
               }}
             />
           </div>
+
+          <div className="editPesanan__single">
+            <TealTextField
+              fullWidth
+              multiline
+              rows={4}
+              id="alamat"
+              name="alamat"
+              label="Alamat"
+              variant="standard"
+              value={alamat}
+              onChange={(e) => {
+                setAlamat(e.target.value);
+              }}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </div>
+
           <div className="editPesanan__single">
             <TealTextField
               fullWidth
